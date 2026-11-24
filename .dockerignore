@@ -1,0 +1,18 @@
+# Build context for deploy/cloudrun/Dockerfile. Keep data/hosted.db; never send the
+# 1.9 GB ingest database or local telemetry to the Docker daemon.
+.git
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+data/repindex.db
+data/usage.db
+data/*.db-wal
+data/*.db-shm
+reports
+docs
+distribution
+public
+.deploy
+tmp

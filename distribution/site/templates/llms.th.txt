@@ -1,0 +1,27 @@
+# Zapproof (ภาษาไทย)
+
+> ดัชนีหลักฐานการชำระเงินแบบอ่านอย่างเดียวสำหรับ AI agent สร้างจากหลักฐานการชำระเงินบน Base — ไม่พบข้อมูลไม่ใช่เรื่องแย่
+
+## MCP server
+
+- [Remote MCP](__API_URL__/mcp): เชื่อมต่อแบบ Streamable HTTP; มีเครื่องมือเดียว `check_counterparty` — ไม่ต้องมี key, ไม่มี wallet, ไม่มีสิทธิ์เขียน
+- [Skill ภาษาไทย](__API_URL__/skill.th.md): ขั้นตอน GET → 402 → จ่าย 1 sat → retry หนึ่งครั้ง พร้อมกฎการใช้คำตอบ
+- [Skill English](__API_URL__/skill.md): ฉบับภาษาอังกฤษสำหรับ agent ที่ใช้ภาษาอังกฤษ
+
+## API
+
+- [OpenAPI](__API_URL__/openapi.json): JSON แบบอ่านอย่างเดียวจากหลักฐานชุดเดียวกัน hosted index ตอบฟรีวันนี้; toll 1 sat (ประมาณ 0.001 USDC บน Base) กำลังเปิดใช้
+- [Methodology](__API_URL__/v1/methodology): วิธีที่หลักฐานกลายเป็นคะแนน และข้อจำกัดที่ต้องอ่านไปพร้อมกัน
+- แพ็กเกจ offline `uvx zapproof-mcp` เผยแพร่บน PyPI แล้ว ทำงานจาก snapshot ของ seller
+  และ hosted endpoint จะใช้ได้เมื่อ `/v1/health` ตอบ `200` — ตรวจสถานะก่อนเชื่อถือคะแนน
+
+## บทความ
+
+- [Payments are going production. Trust isn't.](__BASE_URL__/payments-vs-trust/): ทำไมการชำระเงินที่ settled แล้วจึงเป็นหลักฐาน ไม่ใช่คำตัดสิน และทำไมไม่พบข้อมูลจึงไม่ใช่เรื่องแย่ (ภาษาอังกฤษ)
+
+## สิ่งที่มันไม่ทำ
+
+- ไม่ให้คะแนนการชำระเงินผ่าน Lightning; rail นั้นยังไม่ถูก index (`rail_not_indexed`)
+- ไม่แปลง address ที่ไม่รู้จักเป็นคะแนนต่ำ `found: false` และ `insufficient_evidence` ไม่ใช่สัญญาณเชิงลบ
+- การตีความไม่ได้ถูกตรวจสอบอย่างอิสระ การตัดสินแบบ blinded เห็นด้วยประมาณ 62% ของครั้ง (83% เมื่อไม่นับ abstentions) และผู้ตัดสินเป็น language model
+- ฟิลด์และค่าใน JSON เป็นภาษาอังกฤษโดยตั้งใจ เพื่อความเข้ากันได้ของ agent ทุกตัว

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.noareyenoar/x402-counterparty-reputation",
+  "title": "Zapproof — x402 counterparty reputation",
+  "description": "Check an EVM address's settled-payment record on Base before paying it.",
+  "version": "0.1.2",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://zapproof-hc75zyauja-uc.a.run.app/mcp"
+    }
+  ],
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "zapproof-mcp",
+      "version": "0.1.2",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "ZAPPROOF_API_URL",
+          "description": "Base URL of a hosted index. When set, lookups use it instead of the bundled snapshot.",
+          "isRequired": false,
+          "format": "string"
+        },
+        {
+          "name": "ZAPPROOF_SNAPSHOT",
+          "description": "Path to a snapshot database to use instead of the bundled one.",
+          "isRequired": false,
+          "format": "filepath"
+        },
+        {
+          "name": "REPINDEX_DB",
+          "description": "Path to a full local index database, for source checkouts. Not needed by package users.",
+          "isRequired": false,
+          "format": "filepath"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zapproof — check before you pay</title>
+    <meta name="description" content="Read-only reputation index for AI agents: settled-payment evidence on Base, with its limits stated. Unknown is not bad.">
+    <link rel="alternate" hreflang="en" href="__BASE_URL__/">
+    <link rel="alternate" hreflang="th" href="__BASE_URL__/th/">
+    <link rel="alternate" hreflang="x-default" href="__BASE_URL__/">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "Zapproof MCP",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Any",
+            "description": "A read-only MCP server that checks an EVM address's settled-payment record on Base before an agent pays it.",
+            "url": "__BASE_URL__/",
+            "isAccessibleForFree": true,
+            "inLanguage": "en",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "WebAPI",
+            "name": "Zapproof API",
+            "description": "Read-only JSON endpoints for observed settled-payment evidence and a rules-based interpretation. Free while the 1-sat (about 0.001 USDC) x402 toll is being brought online.",
+            "documentation": "__API_URL__/openapi.json",
+            "inLanguage": "en",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "provider": {
+              "@type": "Organization",
+              "name": "Zapproof",
+              "url": "__BASE_URL__/"
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <main>
+      <p><strong>English</strong> · <a href="__BASE_URL__/th/">ภาษาไทย</a></p>
+      <h1>Zapproof</h1>
+      <p>
+        A read-only reputation index for AI agents, scored from evidence of settled
+        payments on Base. Ask before you pay: check whether a counterparty has a payment
+        record. Unknown is not bad.
+      </p>
+      <h2>Use it</h2>
+      <p>Connect to the hosted remote MCP endpoint:</p>
+      <pre><code>{
+  "mcpServers": {
+    "zapproof": {
+      "url": "__API_URL__/mcp"
+    }
+  }
+}</code></pre>
+      <p>
+        One tool: <code>check_counterparty</code>. No key, no wallet, no write access.
+      </p>
+      <p>
+        The offline <code>uvx zapproof-mcp</code> package is on PyPI and carries a
+        seller snapshot; it works without a key or wallet. The hosted endpoint is
+        usable only once <code>/v1/health</code> returns <code>200</code>; check that
+        before relying on the hosted score.
+      </p>
+      <p>
+        The hosted index answers free today. A 1-sat x402 toll — about 0.001 USDC on
+        Base — is being brought online; when it is enabled, a score request returns a
+        402 challenge and the <a href="__API_URL__/skill.md">skill file</a> explains the
+        single payment and retry. The offline package stays the no-friction path.
+      </p>
+      <h2>Read the limits with the number</h2>
+      <p>
+        The interpretation is rules-based and is not independently validated. Blinded
+        adjudication agreed with it about 62% of the time (83% excluding abstentions);
+        the adjudicators were language models, not humans. <code>found: false</code> and
+        <code>insufficient_evidence</code> are not negative signals, and a null score is
+        not a zero. Lightning is not indexed.
+      </p>
+      <h2>Links</h2>
+      <ul>
+        <li><a href="__API_URL__/skill.md">Agent skill (402 → pay 1 sat → retry)</a></li>
+        <li><a href="__API_URL__/skill.th.md">Skill ภาษาไทย</a></li>
+        <li><a href="__API_URL__/v1/methodology">Methodology and limits</a></li>
+        <li><a href="__API_URL__/openapi.json">OpenAPI</a></li>
+        <li><a href="__BASE_URL__/payments-vs-trust/">Payments are going production. Trust isn't.</a></li>
+        <li><a href="__BASE_URL__/th/">หน้าเว็บภาษาไทย</a></li>
+      </ul>
+    </main>
+  </body>
+</html>

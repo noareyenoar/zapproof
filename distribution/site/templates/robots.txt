@@ -1,0 +1,5 @@
+# Rendered by scripts/render_site.py — __BASE_URL__ is replaced at render time.
+User-agent: *
+Allow: /
+
+Sitemap: __BASE_URL__/sitemap.xml

@@ -1,0 +1,79 @@
+# Zapproof thresholds
+#
+# ⚠️ HUMAN-OWNED FILE ⚠️
+# The engineering agent must NEVER edit this file after creation, and must NEVER
+# weaken a threshold to make a gate pass (prompt Section 3.4.4).
+# If a threshold looks wrong: say so in the gate report and STOP.
+# Bugs in a gate script may be fixed only with a written rationale in
+# reports/gate_changes.md, and the owner must be told (prompt Section 3.4.5).
+#
+# Created: 2026-10-16 from prompt Section 5.
+
+global:
+  max_monthly_cost_usd: 0
+  finality_lag_blocks: 60          # verify Base reorg behavior; ingest only up to head - lag
+  backfill_days_default: 30
+
+node_ops:                          # owner-authorised 2026-10-16 (prompt Section 1A.13)
+  enabled: true
+  bitcoin_backend: neutrino        # avoids the ~700GB-1TB disk cost of an unpruned full node
+  lightning_routing_enabled: true
+  min_free_disk_gb: 50
+  channel_capital_sats_max: 1000000      # owner decision 2026-10-16
+  onchain_fee_budget_sats_month: 50000   # PROPOSED 2026-10-16 — owner has not confirmed; see the owner decision record
+  uptime_target_pct: 99
+
+phase0:
+  decoded_sample_min: 1000
+  onchain_recheck_sample: 50
+  crosscheck_window_hours: 1
+  crosscheck_max_relative_diff: 0.02
+  unresolved_token_share_max: 0.02
+  protocol_evidence_txs_min: 20
+
+phaseA:
+  duplicate_records_allowed: 0
+  crosscheck_windows: 3
+  crosscheck_max_relative_diff: 0.02
+  planted_pattern_recall_min: 0.90
+  planted_genuine_fpr_max: 0.10
+  sensitivity_perturbation_pct: 25
+  sensitivity_unstable_share_shift_pp: 15
+  spot_check_sample_size: 50
+  spot_check_agreement_min: 0.70      # reused as the blinded-adjudicator agreement floor
+  # Added 2026-10-28 with owner approval, when the human spot-check was replaced by
+  # blinded adjudication. See docs/SPOT_CHECK_RUBRIC.md. Every value here is a
+  # condition the old check did not have, so the replacement is stricter, not looser.
+  min_flagged_in_sample: 10           # below this the sample cannot discriminate
+  inter_rater_min: 0.70               # the two adjudicators must agree with each other
+  negative_control_max: 0.40          # agreement with a deliberately broken classifier
+  max_abstention: 0.30                # cannot_tell is not a way to score without committing
+  min_evidence_for_point_score:
+    settlements: 20
+    unique_counterparties: 5
+    active_days: 3
+
+phaseB:
+  core_test_coverage_min_pct: 85
+  api_sustained_rps: 20
+  api_load_test_seconds: 120
+  api_p95_ms_cached: 300
+  api_error_rate_max: 0.01
+  market_window_days: 30
+  market_min_unique_external_callers: 10
+
+phaseC:
+  forged_receipt_acceptance_max: 0
+  receipt_fuzz_mutations: 1000
+  sybil_clique_size: 50
+  sybil_seeds: 10
+  sybil_attacker_max_percentile_of_honest: 25
+  real_nostr_events_min: 100
+  real_nostr_parse_success_min: 0.95
+  middleware_added_latency_p95_ms: 25
+  market_min_operators_installed: 3
+  market_window_days: 45
+
+phaseD:
+  quickstart_max_minutes: 15
+  link_check_failures_max: 0

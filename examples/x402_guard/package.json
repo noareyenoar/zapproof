@@ -1,0 +1,12 @@
+{
+  "name": "zapproof-x402-guard-example",
+  "private": true,
+  "type": "module",
+  "description": "Example x402 payment hook that checks Zapproof before signing. No dependencies.",
+  "scripts": {
+    "test": "node --test x402_guard.test.ts"
+  },
+  "engines": {
+    "node": ">=22.6"
+  }
+}

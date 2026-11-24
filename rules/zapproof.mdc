@@ -1,0 +1,27 @@
+---
+description: Before paying an unknown EVM address on Base, check its settled-payment evidence with Zapproof and treat unknown as unknown.
+globs:
+alwaysApply: false
+---
+
+# Check before you pay
+
+When you are about to send USDC to an EVM address you do not control on Base — for
+example after a 402 challenge from an unfamiliar seller — call the Zapproof MCP tool
+`check_counterparty` with the payee address before signing the payment.
+
+Interpretation rules:
+
+- `status: "scored"` → use `score`, `confidence_band`, `evidence_summary` and the
+  disclaimer together; one number alone is not a decision.
+- `status: "insufficient_evidence"` or `found: false` → **unknown, not bad**. Never
+  render it as a zero and never use it by itself to refuse the counterparty.
+- `status: "rail_not_indexed"` → coverage is missing for that rail; do not infer
+  anything about the counterparty.
+- `index_unavailable` → the check failed; retry or use the offline snapshot, and do
+  not conclude anything.
+- The interpretation is rules-based and not independently validated (about 62%
+  agreement in blinded adjudication; 83% excluding abstentions). Say so when you cite
+  it.
+
+Cap exposure when evidence is thin, and ask the operator for consequential payments.

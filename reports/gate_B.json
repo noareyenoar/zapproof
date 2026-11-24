@@ -1,0 +1,233 @@
+{
+  "gate": "B",
+  "generated": "2026-11-17T13:05:12+00:00",
+  "commit": "7366d4b7beaa81a477ebb786594dfdc61eba79dc",
+  "data_snapshot_hash": "5cf9d19b08ad6d2de7b5a071a8d94cd962f711a00b2a76153777548a594967fc",
+  "checks": [
+    {
+      "id": "GB.1",
+      "title": "OpenAPI schema exists and contract tests pass",
+      "status": "PASS",
+      "measured": "4 versioned path(s)",
+      "threshold": "reports/openapi.json present; schemathesis (or equivalent) exit 0",
+      "evidence": [
+        "reports/openapi.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GB.2",
+      "title": "Line coverage of core modules meets the minimum",
+      "status": "PASS",
+      "measured": "91.30% (mcp/server.py 82.3%)",
+      "threshold": "coverage >= 85%",
+      "evidence": [
+        "reports/coverage_B.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GB.3",
+      "title": "Load test: throughput, cached p95 latency, error rate",
+      "status": "PASS",
+      "measured": "20.01 rps, p95 19.19 ms, errors 0.00%, throttled 0, Windows 10 / Intel64 Family 6 Model 191 Stepping 2, GenuineIntel / 3.11.9",
+      "threshold": "20 rps for 120s; p95 <= 300 ms; errors <= 1%",
+      "evidence": [
+        "reports/loadtest_B.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GB.4",
+      "title": "Security: dependencies, secrets, read-only, fuzz-safe identifiers",
+      "status": "PASS",
+      "measured": "0 high/critical advisories; gitleaks clean; 23 fuzz cases, 0 crashes; writes refused, db unchanged",
+      "threshold": "no high/critical advisories; secret scan clean; no write routes; fuzz passes",
+      "evidence": [
+        "reports/fuzz_identifier.json",
+        "reports/write_probe.json",
+        "reports/secret_scan.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GB.5",
+      "title": "Identical requests at the same as_of_block return identical bytes",
+      "status": "PASS",
+      "measured": "444b7c5af94852d1… vs 444b7c5af94852d1… (control differs)",
+      "threshold": "two responses for the same identifier and block hash identically",
+      "evidence": [
+        "reports/determinism_B.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GB.6",
+      "title": "MCP tool answers invalid, unknown, and insufficient-evidence cases",
+      "status": "PASS",
+      "measured": "3/3 cases passed",
+      "threshold": "all three cases pass via the stdio client",
+      "evidence": [
+        "reports/mcp_test.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GB.7",
+      "title": "Agent card validates against the A2A specification, or is marked UNVERIFIED",
+      "status": "PASS",
+      "measured": "card present; validation explicitly recorded as UNVERIFIED",
+      "threshold": "card validates, or docs/a2a_notes.md records UNVERIFIED with a reason",
+      "evidence": [
+        "src/repindex/api/static/agent-card.json",
+        "docs/a2a_notes.md"
+      ],
+      "notes": [
+        "the card omits protocolVersion because no specification was fetched"
+      ]
+    },
+    {
+      "id": "GB.8",
+      "title": "Unknown is not zero, at both the API and the MCP tool",
+      "status": "PASS",
+      "measured": "pytest exit 0",
+      "threshold": "a passing test proves found:false and no numeric score",
+      "evidence": [],
+      "notes": []
+    },
+    {
+      "id": "GB.9",
+      "title": "Language audit on API strings, MCP descriptions and published docs",
+      "status": "PASS",
+      "measured": "28 files scanned, 0 hit(s)",
+      "threshold": "no banned term used as an assertion about an entity",
+      "evidence": [],
+      "notes": []
+    },
+    {
+      "id": "GB.10",
+      "title": "DISPUTES.md exists and the corrections script has an audited test",
+      "status": "PASS",
+      "measured": "pytest exit 0",
+      "threshold": "DISPUTES.md present; corrections test passes and writes an audit record",
+      "evidence": [
+        "DISPUTES.md",
+        "tests/test_corrections.py"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GB.11",
+      "title": "Independent reviewer ran with no unresolved findings",
+      "status": "PASS",
+      "measured": "review_B13.md declares 0 unresolved finding(s)",
+      "threshold": "the newest reports/review_B*.md declares 0 unresolved findings",
+      "evidence": [
+        "reports/review_B.md",
+        "reports/review_B2.md",
+        "reports/review_B3.md",
+        "reports/review_B4.md",
+        "reports/review_B5.md",
+        "reports/review_B6.md",
+        "reports/review_B7.md",
+        "reports/review_B8.md",
+        "reports/review_B9.md",
+        "reports/review_B10.md",
+        "reports/review_B11.md",
+        "reports/review_B12.md",
+        "reports/review_B13.md"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GB.12",
+      "title": "Every response states that the score is not independently validated",
+      "status": "PASS",
+      "measured": "12 response classes checked, 0 missing the marker",
+      "threshold": "every sampled response contains 'not independently validated'",
+      "evidence": [
+        "reports/disclaimer_check.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GB.13",
+      "title": "Identity binding accepts valid proofs and rejects replay, expiry, wrong domain, one key and unsigned revocation; rotation works",
+      "status": "PASS",
+      "measured": "10 e2e case(s), 10/10 required true",
+      "threshold": "unit tests exit 0; binding_e2e.py exit 0 and every required case true",
+      "evidence": [
+        "tests/test_binding.py",
+        "scripts/binding_e2e.py",
+        "reports/binding_e2e.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GB.14",
+      "title": "Gate provenance: source tree committed and evidence produced from this database",
+      "status": "PASS",
+      "measured": "clean tree at 7366d4b7beaa…; data/repindex.db=ed11811394f2ba53…",
+      "threshold": "no uncommitted source changes; every artifact's commit and db_sha256 match HEAD and data/repindex.db",
+      "evidence": [
+        "data/repindex.db",
+        "reports/fuzz_identifier.json",
+        "reports/write_probe.json",
+        "reports/determinism_B.json",
+        "reports/mcp_test.json",
+        "reports/loadtest_B.json",
+        "reports/disclaimer_check.json",
+        "reports/binding_e2e.json",
+        "reports/phase_B_public_analysis.md",
+        "reports/analysis/provenance.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GB.15",
+      "title": "Packaging: Dockerfile, compose file and local deployment guide exist",
+      "status": "PASS",
+      "measured": "three files present; docker compose config exit 0",
+      "threshold": "all three files exist; docker-compose.yml parses with an api service",
+      "evidence": [
+        "Dockerfile",
+        "docker-compose.yml",
+        "docs/deploy_local.md"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GB.16",
+      "title": "Public analysis: report and static charts exist, with no addresses published",
+      "status": "PASS",
+      "measured": "3 charts, 3 referenced, no addresses",
+      "threshold": "producer exit 0 and fresh; reports/phase_B_public_analysis.md present, at least two charts under reports/analysis/, no 0x address in the report",
+      "evidence": [
+        "reports/phase_B_public_analysis.md",
+        "reports/analysis/provenance.json",
+        "reports/analysis"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GB.17",
+      "title": "Usage metrics: unique external callers are measurable with `make metrics`",
+      "status": "PASS",
+      "measured": "0 unique external caller(s) over 30 days",
+      "threshold": "Makefile metrics target is implemented; the script runs and reports unique_external_callers over the configured window",
+      "evidence": [
+        "scripts/metrics.py",
+        "reports/usage_metrics.json"
+      ],
+      "notes": []
+    }
+  ],
+  "summary": {
+    "PASS": 17,
+    "FAIL": 0,
+    "WARN": 0,
+    "NEEDS_HUMAN": 0
+  },
+  "data_db_sha256": "ed11811394f2ba53dec8cddcb6acb348669cad8369bb61585959590633fb7f7c",
+  "source_tree_clean": true
+}

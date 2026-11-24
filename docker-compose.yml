@@ -1,0 +1,37 @@
+# Local deployment of the score API. Run: docker compose up --build
+#
+# The score database is mounted read-only. The API has no write routes and opens it
+# with SQLite `mode=ro`, so a read-only mount breaks nothing and makes the read-only
+# claim true at the filesystem layer too.
+#
+# Usage telemetry is a best-effort middleware in the same process and writes its own
+# database (task B7). It needs a writable path, so it gets a dedicated volume; mounting
+# all of `data/` read-only would have disabled it silently (review G4).
+services:
+  api:
+    build: .
+    image: zapproof-api:local
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data:ro
+      - telemetry:/app/telemetry
+    environment:
+      # Requests per minute per client address (50 rps). The API default is the same.
+      RATE_LIMIT_PER_MINUTE: "3000"
+      # Telemetry lives outside the read-only score-database mount.
+      USAGE_DB: /app/telemetry/usage.db
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/v1/health', timeout=5).status == 200 else 1)"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  telemetry:

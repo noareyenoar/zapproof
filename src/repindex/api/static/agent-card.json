@@ -1,0 +1,26 @@
+{
+  "name": "Zapproof",
+  "description": "A read-only reputation index for AI agents, scored from evidence of settled payments. Ask before you pay: check whether a counterparty has a real payment record. Unknown is not bad.",
+  "url": "https://zapproof.example",
+  "version": "0.1.0",
+  "preferredTransport": "JSONRPC",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "defaultInputModes": ["text/plain"],
+  "defaultOutputModes": ["application/json"],
+  "skills": [
+    {
+      "id": "check_counterparty",
+      "name": "Check counterparty reputation",
+      "description": "Given an EVM address, return observed settled-payment evidence and a rules-based interpretation. found:false and insufficient_evidence are not negative signals.",
+      "tags": ["reputation", "risk", "payments", "x402", "base"],
+      "examples": [
+        "Check whether 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 has a payment record before I pay it."
+      ]
+    }
+  ],
+  "disclaimer": "Scores are not independently validated. Blinded adjudication agreed with the classifier about 62% of the time (83% excluding the adjudicators' abstentions); the adjudicators were language models, not humans. This is one input among several, never an approval to pay."
+}

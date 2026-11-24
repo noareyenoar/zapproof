@@ -1,0 +1,23 @@
+{
+  "generated": "2026-11-17T13:04:49+00:00",
+  "commit": "7366d4b7beaa81a477ebb786594dfdc61eba79dc",
+  "db_sha256": "ed11811394f2ba53dec8cddcb6acb348669cad8369bb61585959590633fb7f7c",
+  "tool_registered": true,
+  "tools": [
+    "check_counterparty"
+  ],
+  "cases": {
+    "invalid_identifier": {
+      "pass": true,
+      "detail": "returned invalid_identifier"
+    },
+    "unknown_address": {
+      "pass": true,
+      "detail": "found=False score=None"
+    },
+    "insufficient_evidence": {
+      "pass": true,
+      "detail": "status=insufficient_evidence score=None"
+    }
+  }
+}

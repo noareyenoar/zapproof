@@ -1,0 +1,60 @@
+{
+  "generated": "2026-11-23T15:55:54.647802+00:00",
+  "database": "data\\repindex.db",
+  "source": {
+    "name": "https://base-rpc.publicnode.com",
+    "class": "independent public JSON-RPC provider",
+    "endpoint_used_by_ingestion": false,
+    "note": "A different RPC provider is an independent operator serving the same Base chain. This verifies our ingestion and decoding against independently fetched logs; it is not an independent indexer and cannot prove chain completeness."
+  },
+  "selection": {
+    "method": "seeded random block window of 20 blocks on each of three distinct days",
+    "seed": 20261123,
+    "windows": 3,
+    "window_blocks": 20
+  },
+  "windows": [
+    {
+      "window": "52924747-52924766",
+      "day": "2026-10-22",
+      "blocks": 20,
+      "db_count": 241,
+      "source_count": 241,
+      "count_relative_diff": 0.0,
+      "db_amount_raw": 48892000,
+      "source_amount_raw": 48892000,
+      "amount_relative_diff": 0.0,
+      "missing_in_source": 0,
+      "extra_in_source": 0,
+      "field_mismatches": 0
+    },
+    {
+      "window": "53170273-53170292",
+      "day": "2026-10-27",
+      "blocks": 20,
+      "db_count": 94,
+      "source_count": 94,
+      "count_relative_diff": 0.0,
+      "db_amount_raw": 205546500,
+      "source_amount_raw": 205546500,
+      "amount_relative_diff": 0.0,
+      "missing_in_source": 0,
+      "extra_in_source": 0,
+      "field_mismatches": 0
+    },
+    {
+      "window": "53196492-53196511",
+      "day": "2026-10-28",
+      "blocks": 20,
+      "db_count": 192,
+      "source_count": 192,
+      "count_relative_diff": 0.0,
+      "db_amount_raw": 14033327,
+      "source_amount_raw": 14033327,
+      "amount_relative_diff": 0.0,
+      "missing_in_source": 0,
+      "extra_in_source": 0,
+      "field_mismatches": 0
+    }
+  ]
+}

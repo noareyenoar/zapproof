@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zapproof — ตรวจก่อนจ่าย</title>
+    <meta name="description" content="ดัชนีหลักฐานการชำระเงินแบบอ่านอย่างเดียวสำหรับ AI agent บน Base พร้อมข้อจำกัดที่เปิดเผย; ไม่พบข้อมูลไม่ใช่คะแนนต่ำ">
+    <link rel="alternate" hreflang="en" href="__BASE_URL__/">
+    <link rel="alternate" hreflang="th" href="__BASE_URL__/th/">
+    <link rel="alternate" hreflang="x-default" href="__BASE_URL__/">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "Zapproof MCP",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Any",
+            "description": "MCP server แบบอ่านอย่างเดียวที่ตรวจหลักฐานการชำระเงินบน Base ของ EVM address ก่อนที่ agent จะจ่ายเงิน",
+            "url": "__BASE_URL__/th/",
+            "isAccessibleForFree": true,
+            "inLanguage": "th",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "WebAPI",
+            "name": "Zapproof API",
+            "description": "JSON endpoints แบบอ่านอย่างเดียวสำหรับหลักฐานการชำระเงินที่สังเกตพบและการตีความด้วยกฎ ฟรีระหว่างที่ toll 1 sat (ประมาณ 0.001 USDC) กำลังเปิดใช้",
+            "documentation": "__API_URL__/openapi.json",
+            "inLanguage": "th",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "provider": {
+              "@type": "Organization",
+              "name": "Zapproof",
+              "url": "__BASE_URL__/th/"
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <main>
+      <p><a href="__BASE_URL__/">English</a> · <strong>ภาษาไทย</strong></p>
+      <h1>Zapproof</h1>
+      <p>
+        ดัชนีหลักฐานการชำระเงินแบบอ่านอย่างเดียวสำหรับ AI agent สร้างจากหลักฐาน
+        การชำระเงินที่ settled แล้วบน Base ถามก่อนจ่าย: คู่ค้ารายนี้มีบันทึก
+        การชำระเงินจริงหรือไม่ — และบันทึกนั้นบอกอะไรได้บ้าง
+        <strong>ไม่พบข้อมูลไม่ใช่เรื่องแย่</strong>
+      </p>
+
+      <h2>วิธีใช้</h2>
+      <p>เชื่อมต่อ remote MCP endpoint นี้:</p>
+      <pre><code>{
+  "mcpServers": {
+    "zapproof": {
+      "url": "__API_URL__/mcp"
+    }
+  }
+}</code></pre>
+      <p>
+        มีเครื่องมือเดียว: <code>check_counterparty</code> ไม่ต้องมี key ไม่มี wallet
+        และไม่มีสิทธิ์เขียนข้อมูล
+      </p>
+      <p>
+        แพ็กเกจ offline <code>uvx zapproof-mcp</code> เผยแพร่บน PyPI แล้ว
+        ทำงานจาก snapshot ของ seller โดยไม่ต้องมี key หรือ wallet และ hosted endpoint
+        จะใช้ได้เมื่อ <code>/v1/health</code> ตอบ <code>200</code> — ตรวจสถานะก่อน
+        เชื่อถือคะแนน
+      </p>
+      <p>
+        hosted index ตอบฟรีวันนี้ toll 1 sat — ประมาณ 0.001 USDC บน Base — กำลังเปิดใช้
+        เมื่อเปิดแล้ว การขอคะแนนจะได้ 402 challenge และไฟล์
+        <a href="__API_URL__/skill.th.md">skill ภาษาไทย</a> อธิบายการจ่ายหนึ่งครั้ง
+        และ retry หนึ่งครั้ง
+      </p>
+
+      <h2>อ่านข้อจำกัดพร้อมตัวเลข</h2>
+      <p>
+        การตีความเป็นแบบ rules-based และไม่ได้ถูกตรวจสอบอย่างอิสระ
+        การตัดสินแบบ blinded เห็นด้วยประมาณ 62% ของครั้ง (83% เมื่อไม่นับ abstentions)
+        ผู้ตัดสินเป็น language model ไม่ใช่มนุษย์ <code>found: false</code> และ
+        <code>insufficient_evidence</code> ไม่ใช่สัญญาณเชิงลบ และคะแนนที่เป็น null
+        ไม่ใช่ศูนย์ Lightning ยังไม่ถูก index
+      </p>
+
+      <h2>ลิงก์</h2>
+      <ul>
+        <li><a href="__API_URL__/skill.th.md">Skill ภาษาไทย (402 → จ่าย 1 sat → retry)</a></li>
+        <li><a href="__API_URL__/skill.md">Agent skill (English)</a></li>
+        <li><a href="__API_URL__/openapi.json">OpenAPI</a></li>
+        <li><a href="__API_URL__/v1/methodology">Methodology</a></li>
+        <li><a href="__BASE_URL__/payments-vs-trust/">บทความ: Payments are going production. Trust isn't. (อังกฤษ)</a></li>
+        <li><a href="__BASE_URL__/">English page</a></li>
+      </ul>
+      <p>
+        ฟิลด์และค่าใน JSON เป็นภาษาอังกฤษโดยตั้งใจ เพื่อให้ agent ทุกตัวอ่านได้
+        เหมือนกัน เอกสารนี้และ skill ภาษาไทยอธิบายความหมายให้ผู้ปฏิบัติงานคนไทย
+      </p>
+    </main>
+  </body>
+</html>

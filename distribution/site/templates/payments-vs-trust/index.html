@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Payments are going production. Trust isn't. — Zapproof</title>
+    <meta name="description" content="A settled payment is evidence, not a verdict. What payment data can and cannot prove before an agent pays a stranger.">
+    <link rel="canonical" href="__BASE_URL__/payments-vs-trust/">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Payments are going production. Trust isn't.",
+        "description": "A settled payment is evidence, not a verdict. What payment data can and cannot prove before an agent pays a stranger.",
+        "datePublished": "2026-11-23",
+        "dateModified": "2026-11-23",
+        "author": {
+          "@type": "Organization",
+          "name": "Zapproof",
+          "url": "__BASE_URL__/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Zapproof"
+        },
+        "mainEntityOfPage": "__BASE_URL__/payments-vs-trust/",
+        "inLanguage": "en"
+      }
+    </script>
+  </head>
+  <body>
+    <main>
+      <p><a href="__BASE_URL__/">Zapproof</a> · <a href="__BASE_URL__/th/">ภาษาไทย</a></p>
+      <article>
+        <h1>Payments are going production. Trust isn't.</h1>
+        <p><time datetime="2026-11-23">2026-11-23</time></p>
+
+        <p>Agents can pay now.</p>
+
+        <p>
+          A 402 response is no longer an exotic demo. It arrives with a price, a network,
+          an asset, and a payee. An agent can read the challenge, sign a payment, and retry
+          the request in seconds. On Base, the settlement is on-chain. On Lightning, a
+          preimage proves an invoice was paid. The payment rails are becoming ordinary.
+        </p>
+
+        <p>That is progress. It is also the moment the next question becomes unavoidable:</p>
+
+        <p><strong>What did the payment actually prove?</strong></p>
+
+        <h2>A settlement is evidence, not a verdict</h2>
+
+        <p>
+          A settled payment proves that money moved from one address to another at a
+          particular time. That is a real and useful fact. It is not the same as saying the
+          counterparty will deliver, that the endpoint is honest, or that the customer was
+          independent.
+        </p>
+
+        <p>Payment data is silent about several things an agent needs:</p>
+
+        <ul>
+          <li>whether the payer and the payee are separate entities;</li>
+          <li>whether the service behind the endpoint was delivered;</li>
+          <li>
+            whether a seller's volume comes from customers or from wallets under its
+            control;
+          </li>
+          <li>
+            whether the same operator is running the same business under a different
+            address.
+          </li>
+        </ul>
+
+        <p>
+          A system that treats "this address has settled payments" as "this address is
+          trustworthy" has answered the easy question and skipped the hard one.
+        </p>
+
+        <h2>Unknown is not bad</h2>
+
+        <p>
+          There is a second failure, quieter than the first: treating missing evidence as
+          negative evidence.
+        </p>
+
+        <p>
+          An address with no record may be new. It may be a payer rather than a seller. It
+          may be on a rail the index does not cover. None of those facts justify a zero. A
+          zero is a claim, and the data does not support it.
+        </p>
+
+        <p>So the honest answers are separate:</p>
+
+        <ul>
+          <li>
+            <strong>scored</strong> — there is enough evidence to interpret, with a stated
+            confidence and the rules that produced it;
+          </li>
+          <li><strong>insufficient evidence</strong> — some record exists, but it is too thin to interpret;</li>
+          <li><strong>unknown</strong> — no record in this index;</li>
+          <li><strong>rail not indexed</strong> — this rail is outside what the index can see.</li>
+        </ul>
+
+        <p>
+          Collapsing those into one number is convenient. It is also how an agent ends up
+          refusing a legitimate new seller, or paying a familiar one without asking a
+          second question.
+        </p>
+
+        <h2>What we are building</h2>
+
+        <p>Zapproof is a read-only check that an agent can call before it pays:</p>
+
+        <blockquote>
+          <p>
+            What settled-payment evidence exists for this counterparty, and what does it
+            not prove?
+          </p>
+        </blockquote>
+
+        <p>
+          It is non-custodial. It does not hold funds, route payments, or sit in the payment
+          path. It has no token and no way to buy standing. It reports observed settlements
+          and a rules-based interpretation, and it says plainly when the evidence is too
+          thin to interpret.
+        </p>
+
+        <p>
+          The current index covers Base x402 settlements. Lightning and MPP are not indexed.
+          A Lightning query returns <code>rail_not_indexed</code>, which means exactly
+          that: missing coverage, not a negative finding. We would rather say that than
+          relabel Base activity as something it is not.
+        </p>
+
+        <h2>The limitation we publish with the product</h2>
+
+        <p>
+          The interpretation is not independently validated. In a blinded adjudication,
+          language models agreed with it about 62% of the time, or 83% when their
+          abstentions are excluded. They are not human reviewers, and the sample is small.
+          Every API and MCP response says this. A number without its limitation travels
+          badly.
+        </p>
+
+        <p>
+          That is not a reason to wait for a perfect classifier. It is a reason to use the
+          answer as one input, cap exposure when evidence is thin, and keep a human in the
+          loop for consequential payments.
+        </p>
+
+        <h2>The check belongs before the payment</h2>
+
+        <p>
+          The useful place for a reputation signal is not after a dispute. It is before the
+          signature:
+        </p>
+
+        <ol>
+          <li>The agent receives a 402 challenge.</li>
+          <li>It checks the counterparty.</li>
+          <li>It pays the full amount, pays a capped amount with approval, or stops.</li>
+          <li>It records why.</li>
+        </ol>
+
+        <p>
+          That order costs one extra request. It also makes the agent's decision auditable,
+          which matters more as agents begin to spend on their own.
+        </p>
+
+        <p>
+          Payments are becoming infrastructure. Trust has to become a check the agent can
+          run, with its limits attached.
+        </p>
+
+        <p><strong>Check before you pay.</strong></p>
+      </article>
+
+      <hr>
+      <p>
+        <em>
+          Zapproof is read-only and non-custodial. It does not hold or move funds. Its
+          interpretation is rules-based and not independently validated; use it as one
+          input among several, never as an approval to pay.
+        </em>
+      </p>
+      <p><a href="__BASE_URL__/">Back to Zapproof</a></p>
+    </main>
+  </body>
+</html>

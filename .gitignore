@@ -1,0 +1,46 @@
+# Secrets — prompt Section 3.3
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+
+# Local data (regenerable; never commit a database)
+*.db
+*.db-wal
+*.db-shm
+data/
+
+# Scratch probes and lab scripts — never committed (see pyproject.toml ruff exclude)
+tmp/
+# Research downloads from a working session (schema and protocol notes). They are
+# inputs to an artifact, not evidence; the artifact itself is committed.
+.tmp-*
+
+# Rendered site and deploy state. The templates carry __BASE_URL__/__API_URL__; the
+# rendered output is produced by scripts/render_site.py at deploy time.
+public/
+.deploy/
+# Firebase CLI working directory created by a deploy from this machine.
+.firebase/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# NOTE: reports/ and docs/ are deliberately NOT ignored — gate outputs are evidence
+# and must be committed (prompt Section 3.4.2). Scratch logs from a working session are
+# the exception; they are not evidence.
+reports/_*.log

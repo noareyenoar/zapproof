@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "zapproof",
+  "version": "0.1.1",
+  "description": "Read-only pre-payment check for x402 agents: what settled-payment evidence exists for an EVM address on Base, and what it does not prove.",
+  "author": {
+    "name": "Zapproof"
+  },
+  "homepage": "https://zapproof.web.app",
+  "repository": "https://github.com/noareyenoar/zapproof",
+  "license": "MIT",
+  "keywords": [
+    "x402",
+    "reputation",
+    "payments",
+    "base",
+    "usdc",
+    "mcp",
+    "agent-commerce"
+  ]
+}

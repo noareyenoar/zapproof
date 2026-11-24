@@ -1,0 +1,16 @@
+# Normalise line endings to LF in the repository.
+#
+# This matters: core.autocrlf is on for this machine, which would rewrite the
+# shell scripts (`.githooks/pre-commit`, `scripts/*.sh`) to CRLF on checkout and
+# break them under Git Bash. Shell scripts and Makefiles must stay LF.
+
+* text=auto eol=lf
+
+*.sh      text eol=lf
+Makefile  text eol=lf
+.githooks/* text eol=lf
+
+*.png     binary
+*.jpg     binary
+*.parquet binary
+*.db      binary

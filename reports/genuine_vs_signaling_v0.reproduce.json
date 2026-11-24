@@ -1,0 +1,110 @@
+{
+  "report": "genuine_vs_signaling_v0.md",
+  "entries": [
+    {
+      "label": "settlement_count",
+      "command": "uv run python scripts/metrics_report.py settlements",
+      "expected": 2389053
+    },
+    {
+      "label": "seller_count",
+      "command": "uv run python scripts/metrics_report.py sellers",
+      "expected": 19397
+    },
+    {
+      "label": "scored_count",
+      "command": "uv run python scripts/metrics_report.py scored",
+      "expected": 1433
+    },
+    {
+      "label": "insufficient_count",
+      "command": "uv run python scripts/metrics_report.py insufficient_evidence",
+      "expected": 17964
+    },
+    {
+      "label": "flagged_seller_count",
+      "command": "uv run python scripts/metrics_report.py flagged_sellers",
+      "expected": 28
+    },
+    {
+      "label": "flagged_settlement_share_pct",
+      "command": "uv run python scripts/metrics_report.py flagged_settlement_share_pct",
+      "expected": 0.5902
+    },
+    {
+      "label": "flagged_below_minimum_seller_count",
+      "command": "uv run python scripts/metrics_report.py flagged_below_minimum_sellers",
+      "expected": 95
+    },
+    {
+      "label": "flagged_below_minimum_settlement_share_pct",
+      "command": "uv run python scripts/metrics_report.py flagged_below_minimum_settlement_share_pct",
+      "expected": 0.7735
+    },
+    {
+      "label": "nonzero_likelihood_scored_sellers",
+      "command": "uv run python scripts/metrics_report.py nonzero_likelihood_scored_sellers",
+      "expected": 183
+    },
+    {
+      "label": "cluster_count",
+      "command": "uv run python scripts/metrics_report.py clusters",
+      "expected": 10
+    },
+    {
+      "label": "window_start_block",
+      "command": "uv run python scripts/metrics_report.py window_start",
+      "expected": 52893065
+    },
+    {
+      "label": "window_end_block",
+      "command": "uv run python scripts/metrics_report.py window_end",
+      "expected": 53201719
+    },
+    {
+      "label": "window_hours",
+      "command": "uv run python scripts/metrics_report.py window_hours",
+      "expected": 171.5
+    },
+    {
+      "label": "phase0_census_window_start_block",
+      "command": "uv run python scripts/metrics_report.py phase0_census_window_start_block",
+      "expected": 52677290
+    },
+    {
+      "label": "phase0_census_window_end_block",
+      "command": "uv run python scripts/metrics_report.py phase0_census_window_end_block",
+      "expected": 52979689
+    },
+    {
+      "label": "phase0_unsupported_token_share_pct",
+      "command": "uv run python scripts/metrics_report.py phase0_unsupported_token_share_pct",
+      "expected": 0.1015
+    },
+    {
+      "label": "phase0_unresolved_mechanism_share_pct",
+      "command": "uv run python scripts/metrics_report.py phase0_unresolved_mechanism_share_pct",
+      "expected": 0.00431
+    },
+    {
+      "label": "flag_cutoff",
+      "command": "uv run python scripts/metrics_report.py flag_cutoff",
+      "expected": 0.5
+    },
+    {
+      "label": "sensitivity_max_shift_pp",
+      "command": "uv run python scripts/metrics_report.py sensitivity_max_shift_pp",
+      "expected": 0.5411
+    },
+    {
+      "label": "sensitivity_perturbation_pct",
+      "command": "uv run python scripts/metrics_report.py sensitivity_perturbation_pct",
+      "expected": 25
+    },
+    {
+      "label": "sensitivity_unstable_share_shift_pp",
+      "command": "uv run python scripts/metrics_report.py sensitivity_unstable_share_shift_pp",
+      "expected": 15
+    }
+  ]
+}
