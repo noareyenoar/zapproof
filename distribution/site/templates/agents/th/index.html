@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zapproof สำหรับ agent — ตรวจก่อนจ่าย</title>
+    <meta name="description" content="MCP server และ API แบบอ่านอย่างเดียวสำหรับ agent: หลักฐานการชำระเงินบน Base และ Solana x402 พร้อมข้อจำกัดที่เปิดเผย; ไม่พบข้อมูลไม่ใช่คะแนนต่ำ">
+    <link rel="canonical" href="__BASE_URL__/agents/th/">
+    <link rel="alternate" hreflang="en" href="__BASE_URL__/agents/">
+    <link rel="alternate" hreflang="th" href="__BASE_URL__/agents/th/">
+    <link rel="alternate" hreflang="x-default" href="__BASE_URL__/agents/">
+    <link rel="stylesheet" href="__BASE_URL__/assets/site.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "Zapproof MCP",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Any",
+            "description": "MCP server แบบอ่านอย่างเดียวที่ตรวจหลักฐานการชำระเงินของ EVM หรือ Solana address ก่อนที่ agent จะจ่ายเงิน",
+            "url": "__BASE_URL__/agents/th/",
+            "codeRepository": "https://github.com/noareyenoar/zapproof",
+            "softwareVersion": "0.1.3",
+            "license": "https://opensource.org/licenses/MIT",
+            "isAccessibleForFree": true,
+            "inLanguage": "th",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "WebAPI",
+            "name": "Zapproof API",
+            "description": "JSON endpoints แบบอ่านอย่างเดียวสำหรับหลักฐานการชำระเงินที่สังเกตพบและการตีความด้วยกฎ ฟรีระหว่างที่ toll 1 sat (ประมาณ 0.001 USDC) กำลังเปิดใช้",
+            "documentation": "__API_URL__/openapi.json",
+            "inLanguage": "th",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "provider": {
+              "@type": "Organization",
+              "name": "Zapproof",
+              "url": "__BASE_URL__/th/"
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">ข้ามไปเนื้อหา</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="__BASE_URL__/th/">
+          <svg viewBox="0 0 400 400" aria-hidden="true">
+            <g fill="none" stroke="#0B1220" stroke-linecap="round">
+              <path d="M96 200H268" stroke-width="22"/>
+              <path d="M268 136V264" stroke-width="26"/>
+            </g>
+            <circle cx="224" cy="200" r="20" fill="#2F6BFF"/>
+          </svg>
+          <span>Zapproof<small>สำหรับ agent</small></span>
+        </a>
+        <nav class="nav" aria-label="เมนูหลัก">
+          <a href="#start">เริ่มใช้</a>
+          <a href="#limits">ข้อจำกัด</a>
+          <a href="__BASE_URL__/agents/" hreflang="en" lang="en">English</a>
+          <a class="lang" href="__BASE_URL__/th/">หน้าเว็บหลัก</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-head">
+        <div class="wrap">
+          <p class="kicker">สำหรับ agent และนักพัฒนา</p>
+          <h1>ตรวจก่อนจ่าย</h1>
+          <p>
+            Zapproof ตอบคำถามเดียวเกี่ยวกับคู่ค้า: มีหลักฐานการชำระเงินอะไรอยู่ —
+            และหลักฐานนั้นไม่ได้พิสูจน์อะไร อ่านอย่างเดียว ไม่ต้องมี key ไม่ต้องมี wallet
+            hosted index ฟรีวันนี้; toll 1 sat กำลังเปิดใช้
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="start">
+        <div class="wrap">
+          <div class="prose">
+            <h2>เริ่มใช้</h2>
+            <p>เชื่อมต่อ remote MCP endpoint นี้:</p>
+<pre><code>{
+  "mcpServers": {
+    "zapproof": {
+      "url": "__API_URL__/mcp"
+    }
+  }
+}</code></pre>
+            <p>
+              มีเครื่องมือเดียว: <code>check_counterparty</code> ไม่ต้องมี key ไม่มี wallet
+              และไม่มีสิทธิ์เขียนข้อมูล identifier ที่รับ:
+            </p>
+            <ul>
+              <li><code>0x…</code> — EVM address ตอบจากดัชนี x402 บน Base</li>
+              <li>base58 key ของ Solana — ตอบจาก rail x402 บน Solana ด้วยหน้าต่างเก็บข้อมูล 7 วัน (2026-11-18 ถึง 2026-11-25) พร้อมหน้าต่างและตัวแยกประเภทกำกับ</li>
+              <li>EVM <code>did:</code> identifier เมื่อต้องการ identity binding</li>
+            </ul>
+
+            <h2>แพ็กเกจ offline</h2>
+            <p>
+              <code>uvx zapproof-mcp</code> เผยแพร่บน PyPI แล้ว ทำงานจาก snapshot
+              ของ seller โดยไม่ต้องมี key หรือ wallet และ hosted endpoint จะใช้ได้เมื่อ
+              <code>/v1/health</code> ตอบ <code>200</code> — ตรวจสถานะก่อนเชื่อถือคะแนน
+            </p>
+
+            <h2>toll 1 sat</h2>
+            <p>
+              hosted index ตอบฟรีวันนี้ toll 1 sat — ประมาณ 0.001 USDC บน Base —
+              กำลังเปิดใช้ เมื่อเปิดแล้ว การขอคะแนนจะได้ 402 challenge และไฟล์
+              <a href="__API_URL__/skill.th.md">skill ภาษาไทย</a> อธิบายการจ่ายหนึ่งครั้ง
+              และ retry หนึ่งครั้ง แพ็กเกจ offline ยังเป็นทางที่ไม่ต้องผ่านการจ่าย
+            </p>
+
+            <h2 id="limits">อ่านข้อจำกัดพร้อมตัวเลข</h2>
+            <blockquote>
+              การตีความเป็นแบบ rules-based และไม่ได้ถูกตรวจสอบอย่างอิสระ
+              การตัดสินแบบ blinded เห็นด้วยประมาณ 62% ของครั้ง (83% เมื่อไม่นับ
+              abstentions) ผู้ตัดสินเป็น language model ไม่ใช่มนุษย์
+            </blockquote>
+            <p>
+              <code>found: false</code> และ <code>insufficient_evidence</code>
+              ไม่ใช่สัญญาณเชิงลบ และคะแนนที่เป็น null ไม่ใช่ศูนย์ ทุกคำตอบแนบหลักฐาน
+              กฎ และข้อจำกัดของตัวเอง — รวมถึง <code>evidence_hash</code>
+              ที่เก็บไว้เทียบครั้งต่อไปได้ Lightning และ MPP ยังไม่ถูก index;
+              คำถามสำหรับ rail เหล่านั้นได้ <code>rail_not_indexed</code>
+              ซึ่งหมายถึงขาดการครอบคลุม ไม่ใช่ข้อสรุปเชิงลบ
+            </p>
+            <p>
+              Zapproof ไม่ได้ออกการอนุมัติให้จ่าย ใช้คำตอบเป็นข้อมูลหนึ่งในหลาย ๆ อย่าง
+            </p>
+
+            <h2>ลิงก์</h2>
+            <ul>
+              <li><a href="__API_URL__/skill.th.md">Skill ภาษาไทย (402 → จ่าย 1 sat → retry)</a></li>
+              <li><a href="__API_URL__/skill.md">Agent skill (English)</a></li>
+              <li><a href="__API_URL__/openapi.json">OpenAPI</a></li>
+              <li><a href="__API_URL__/v1/methodology">Methodology</a></li>
+              <li><a href="__BASE_URL__/llms.th.txt">llms.txt ภาษาไทย</a></li>
+              <li><a href="__BASE_URL__/payments-vs-trust/">บทความ: Payments are going production. Trust isn't. (อังกฤษ)</a></li>
+              <li><a href="__BASE_URL__/th/">หน้าเว็บหลัก (สำหรับคน)</a></li>
+            </ul>
+            <p>
+              ฟิลด์และค่าใน JSON เป็นภาษาอังกฤษโดยตั้งใจ เพื่อให้ agent ทุกตัวอ่านได้
+              เหมือนกัน เอกสารนี้และ skill ภาษาไทยอธิบายความหมายให้ผู้ปฏิบัติงานคนไทย
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="note">
+          <strong>Zapproof</strong> · ตรวจก่อนจ่าย<br>
+          อ่านอย่างเดียวและไม่ถือเงิน — Zapproof ไม่ถือหรือเคลื่อนย้ายเงิน
+          และคำตอบไม่ใช่การอนุมัติให้จ่าย
+        </div>
+        <nav aria-label="ลิงก์ท้ายหน้า">
+          <a href="__BASE_URL__/th/">หน้าเว็บหลัก</a>
+          <a href="__BASE_URL__/agents/" hreflang="en" lang="en">English</a>
+          <a href="__API_URL__/skill.th.md">Skill</a>
+          <a href="__API_URL__/v1/methodology">Methodology</a>
+          <a href="https://github.com/noareyenoar">GitHub</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

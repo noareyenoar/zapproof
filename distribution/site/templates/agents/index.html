@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zapproof for agents — check before you pay</title>
+    <meta name="description" content="A read-only MCP server and API for agents: settled-payment evidence on Base and Solana x402, with its limits stated. Unknown is not bad.">
+    <link rel="canonical" href="__BASE_URL__/agents/">
+    <link rel="alternate" hreflang="en" href="__BASE_URL__/agents/">
+    <link rel="alternate" hreflang="th" href="__BASE_URL__/agents/th/">
+    <link rel="alternate" hreflang="x-default" href="__BASE_URL__/agents/">
+    <link rel="stylesheet" href="__BASE_URL__/assets/site.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "Zapproof MCP",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Any",
+            "description": "A read-only MCP server that checks an EVM or Solana address's settled-payment record before an agent pays it.",
+            "url": "__BASE_URL__/agents/",
+            "codeRepository": "https://github.com/noareyenoar/zapproof",
+            "softwareVersion": "0.1.3",
+            "license": "https://opensource.org/licenses/MIT",
+            "isAccessibleForFree": true,
+            "inLanguage": "en",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "WebAPI",
+            "name": "Zapproof API",
+            "description": "Read-only JSON endpoints for observed settled-payment evidence and a rules-based interpretation. Free while the 1-sat (about 0.001 USDC) x402 toll is being brought online.",
+            "documentation": "__API_URL__/openapi.json",
+            "inLanguage": "en",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "provider": {
+              "@type": "Organization",
+              "name": "Zapproof",
+              "url": "__BASE_URL__/"
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="__BASE_URL__/">
+          <svg viewBox="0 0 400 400" aria-hidden="true">
+            <g fill="none" stroke="#0B1220" stroke-linecap="round">
+              <path d="M96 200H268" stroke-width="22"/>
+              <path d="M268 136V264" stroke-width="26"/>
+            </g>
+            <circle cx="224" cy="200" r="20" fill="#2F6BFF"/>
+          </svg>
+          <span>Zapproof<small>For agents</small></span>
+        </a>
+        <nav class="nav" aria-label="Main">
+          <a href="#start">Quick start</a>
+          <a href="#limits">Limits</a>
+          <a href="__BASE_URL__/agents/th/" hreflang="th" lang="th">ภาษาไทย</a>
+          <a class="lang" href="__BASE_URL__/">Main site</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-head">
+        <div class="wrap">
+          <p class="kicker">For agents and builders</p>
+          <h1>Check before you pay.</h1>
+          <p>
+            Zapproof answers one question about a counterparty: what settled-payment
+            evidence exists — and what does it not prove? Read-only, no key, no wallet.
+            The hosted index is free today; a 1-sat toll is being brought online.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="start">
+        <div class="wrap">
+          <div class="prose">
+            <h2>Quick start</h2>
+            <p>Connect to the hosted remote MCP endpoint:</p>
+<pre><code>{
+  "mcpServers": {
+    "zapproof": {
+      "url": "__API_URL__/mcp"
+    }
+  }
+}</code></pre>
+            <p>
+              One tool: <code>check_counterparty</code>. No key, no wallet, no write
+              access. The identifiers it accepts:
+            </p>
+            <ul>
+              <li><code>0x…</code> — an EVM address, answered against the Base x402 index.</li>
+              <li>A base58 Solana key — answered against the Solana x402 rail from a seven-day observation window (2026-11-18 to 2026-11-25), with its window and classifier attached.</li>
+              <li>An EVM <code>did:</code> identifier, when you need identity binding.</li>
+            </ul>
+
+            <h2>The offline package</h2>
+            <p>
+              <code>uvx zapproof-mcp</code> is on PyPI and carries a seller snapshot; it
+              works without a key or wallet. The hosted endpoint is usable only once
+              <code>/v1/health</code> returns <code>200</code> — check that before
+              relying on the hosted score.
+            </p>
+
+            <h2>The 1-sat toll</h2>
+            <p>
+              The hosted index answers free today. A 1-sat x402 toll — about 0.001 USDC
+              on Base — is being brought online; when it is enabled, a score request
+              returns a 402 challenge and the <a href="__API_URL__/skill.md">skill file</a>
+              explains the single payment and retry. The offline package stays the
+              no-friction path.
+            </p>
+
+            <h2 id="limits">Read the limits with the number</h2>
+            <blockquote>
+              The interpretation is rules-based and is not independently validated.
+              Blinded adjudication agreed with it about 62% of the time (83% excluding
+              abstentions); the adjudicators were language models, not humans.
+            </blockquote>
+            <p>
+              <code>found: false</code> and <code>insufficient_evidence</code> are not
+              negative signals, and a null score is not a zero. Every answer carries its
+              evidence, its rules, and its limits — including <code>evidence_hash</code>,
+              which you can store and compare later. Lightning and MPP are not indexed;
+              a query for them returns <code>rail_not_indexed</code>, which means missing
+              coverage, not a negative finding.
+            </p>
+            <p>
+              Zapproof does not issue an approval to pay. Use the answer as one input
+              among several.
+            </p>
+
+            <h2>Links</h2>
+            <ul>
+              <li><a href="__API_URL__/skill.md">Agent skill (402 → pay 1 sat → retry)</a></li>
+              <li><a href="__API_URL__/skill.th.md">Skill ภาษาไทย</a></li>
+              <li><a href="__API_URL__/v1/methodology">Methodology and limits</a></li>
+              <li><a href="__API_URL__/openapi.json">OpenAPI</a></li>
+              <li><a href="__BASE_URL__/llms.txt">llms.txt</a></li>
+              <li><a href="__BASE_URL__/payments-vs-trust/">Payments are going production. Trust isn't.</a></li>
+              <li><a href="__BASE_URL__/">Main site (for people)</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="note">
+          <strong>Zapproof</strong> · check before you pay.<br>
+          Read-only and non-custodial. Zapproof does not hold or move funds, and an
+          answer is never an approval to pay.
+        </div>
+        <nav aria-label="Footer">
+          <a href="__BASE_URL__/">Main site</a>
+          <a href="__BASE_URL__/agents/th/" hreflang="th" lang="th">ภาษาไทย</a>
+          <a href="__API_URL__/skill.md">Skill</a>
+          <a href="__API_URL__/v1/methodology">Methodology</a>
+          <a href="https://github.com/noareyenoar">GitHub</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

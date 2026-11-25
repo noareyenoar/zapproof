@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zapproof — the trust rail for agent commerce</title>
+    <meta name="description" content="Zapproof is the trust rail for agent commerce: a read-only check of settled-payment evidence before an agent pays, through any rail or point of sale. Free today.">
+    <link rel="canonical" href="__BASE_URL__/">
+    <link rel="alternate" hreflang="en" href="__BASE_URL__/">
+    <link rel="alternate" hreflang="th" href="__BASE_URL__/th/">
+    <link rel="alternate" hreflang="x-default" href="__BASE_URL__/">
+    <link rel="stylesheet" href="__BASE_URL__/assets/site.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Zapproof",
+            "url": "__BASE_URL__/",
+            "description": "A read-only settlement-evidence index and the trust rail for agent commerce.",
+            "sameAs": [
+              "https://github.com/noareyenoar",
+              "https://github.com/noareyenoar/zapproof",
+              "https://pypi.org/project/zapproof-mcp/",
+              "https://glama.ai/mcp/servers/noareyenoar/zapproof"
+            ]
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "Zapproof Check",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Any",
+            "description": "A read-only MCP server and API that returns observed settled-payment evidence for a counterparty before an agent pays it.",
+            "url": "__BASE_URL__/agents/",
+            "codeRepository": "https://github.com/noareyenoar/zapproof",
+            "softwareVersion": "0.1.3",
+            "license": "https://opensource.org/licenses/MIT",
+            "isAccessibleForFree": true,
+            "inLanguage": "en"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="__BASE_URL__/">
+          <svg viewBox="0 0 400 400" aria-hidden="true">
+            <g fill="none" stroke="#0B1220" stroke-linecap="round">
+              <path d="M96 200H268" stroke-width="22"/>
+              <path d="M268 136V264" stroke-width="26"/>
+            </g>
+            <circle cx="224" cy="200" r="20" fill="#2F6BFF"/>
+          </svg>
+          <span>Zapproof<small>Trust rail</small></span>
+        </a>
+        <nav class="nav" aria-label="Main">
+          <a href="#products">The check</a>
+          <a href="#how">How it works</a>
+          <a href="#live">What's live</a>
+          <a href="__BASE_URL__/agents/">For agents</a>
+          <a class="lang" href="__BASE_URL__/th/" hreflang="th" lang="th">ไทย</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="wrap">
+          <div>
+            <p class="eyebrow">Trust rail · check before you pay</p>
+            <h1>The trust rail for agent commerce.</h1>
+            <p class="lede">
+              Agents can pay in seconds, through any rail or point of sale. Zapproof is
+              the neutral check in the path: what settled-payment evidence exists for
+              this counterparty — and what does it not prove?
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#how">How the check works</a>
+              <a class="btn btn-ghost" href="__BASE_URL__/agents/">Read the agent docs</a>
+            </div>
+            <div class="chips">
+              <span class="chip chip-live"><span class="dot"></span>Live today · the pre-payment check</span>
+              <span class="chip chip-pilot"><span class="dot"></span>Partnering · POS and wallet integrations</span>
+            </div>
+          </div>
+
+          <aside class="hero-card" aria-label="Illustrative check response">
+            <p class="mock-label">402 · payment request</p>
+            <div class="mock-row"><span>amount</span><strong>1 sat</strong></div>
+            <div class="mock-row"><span>payee</span><code>0x7a…f3</code></div>
+            <div class="mock-divider"></div>
+            <p class="mock-label">Zapproof check</p>
+            <div class="mock-row"><span>settlements</span><strong>1,284</strong></div>
+            <div class="mock-row"><span>distinct payers</span><strong>212</strong></div>
+            <div class="mock-row"><span>active days</span><strong>84</strong></div>
+            <div class="mock-row"><span>operator groups</span><strong>3</strong></div>
+            <p class="mock-hash mono">evidence_hash · sha256:9f2c…7b41</p>
+            <p class="tiny">Illustrative response fields. The check returns evidence and its limits — never an approval to pay.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="why">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">Why now</p>
+            <h2>Payments are going production. Trust isn't.</h2>
+            <p>
+              An agent can read a 402 challenge, sign a payment, and retry in seconds.
+              That speed is useful — and it makes the next question unavoidable.
+            </p>
+          </div>
+          <div class="grid grid-3">
+            <article class="card">
+              <h3>Agents pay strangers</h3>
+              <p>
+                Unattended transactions have no cashier, no chargeback desk, and no one to
+                ask whether the counterparty is worth paying.
+              </p>
+            </article>
+            <article class="card">
+              <h3>A settlement is evidence</h3>
+              <p>
+                A settled payment proves that money moved. It does not prove delivery, and
+                it says nothing about who was on the other side.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Unknown is not bad</h3>
+              <p>
+                A new seller has no record. Treating missing evidence as a low score
+                punishes the honest newcomer and rewards the wrong signal.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="products">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">One product, many partners</p>
+            <h2>The check, wherever agents pay.</h2>
+            <p>
+              Zapproof is the trust layer, not the checkout. POS providers, wallets and
+              payment rails carry the check; their agents ask it before they sign. We do
+              not hold funds and we do not run a point of sale.
+            </p>
+          </div>
+          <div class="grid grid-2">
+            <article class="card">
+              <span class="label label-live"><span class="dot"></span>Live today</span>
+              <h3>Zapproof Check</h3>
+              <p>
+                A read-only answer to one question: what settled-payment evidence exists
+                for this counterparty — and what does it not prove?
+              </p>
+              <ul>
+                <li>Millions of settled x402 payments on Base, with distinct payers, active days and operator groups.</li>
+                <li>The Solana x402 rail is indexed from a seven-day window; Lightning and MPP are not indexed.</li>
+                <li>One MCP tool, <code>check_counterparty</code>; a REST API; and an offline package for agents with no key or wallet.</li>
+                <li>Free today. A 1-sat toll is being brought online.</li>
+              </ul>
+              <a class="card-link" href="__BASE_URL__/agents/">For agents and builders →</a>
+            </article>
+
+            <article class="card">
+              <span class="label label-design"><span class="dot"></span>Open to partners · pilot</span>
+              <h3>Carry the check</h3>
+              <p>
+                If agents pay through your POS, wallet or rail, carry the trust layer
+                with you: distribute our MCP server and skill alongside your product, so
+                every agent can check before it pays.
+              </p>
+              <ul>
+                <li>One HTTPS call or one MCP tool at checkout — no key, no wallet, read-only.</li>
+                <li>Ship our MCP server and skill with your integration; your agents get the check without a second vendor.</li>
+                <li>You keep custody and settlement. Zapproof never holds or moves funds, and there is no fee to carry the check today.</li>
+              </ul>
+              <a class="card-link" href="#partner">Partner with us →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">How it works</p>
+            <h2>A check in the path, not a judge on top.</h2>
+            <p>
+              The useful place for a reputation signal is before the signature, where it
+              can change a decision and be recorded.
+            </p>
+          </div>
+          <div class="steps">
+            <article class="step">
+              <h3>Payment request</h3>
+              <p>
+                The agent receives a 402 challenge or a sats invoice with a payee, an
+                amount, and a network.
+              </p>
+            </article>
+            <article class="step">
+              <h3>Check</h3>
+              <p>
+                It asks Zapproof what settled-payment evidence exists for that payee, with
+                the rules and the limits attached.
+              </p>
+            </article>
+            <article class="step">
+              <h3>Pay through any rail</h3>
+              <p>
+                It pays in sats through a POS or wallet, or in USDC over x402, and the
+                settlement becomes evidence for the next check — not a promise about this
+                one.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="who">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">Who it is for</p>
+            <h2>Built with the people an agent pays through.</h2>
+          </div>
+          <div class="grid grid-3">
+            <article class="card">
+              <h3>POS and payment providers</h3>
+              <p>
+                Carry the check in your checkout with one HTTPS call or one MCP tool.
+                Read-only, no key, no wallet, free today — and your agents get a reason
+                to pay through you.
+              </p>
+              <a class="card-link" href="#partner">Talk to us →</a>
+            </article>
+            <article class="card">
+              <h3>Wallets and agent platforms</h3>
+              <p>
+                Give your agents a trust check before they sign: one tool, explicit
+                unknown states, and an answer hash you can store and compare later.
+              </p>
+              <a class="card-link" href="__BASE_URL__/agents/">Integrate →</a>
+            </article>
+            <article class="card">
+              <h3>Merchants &amp; agent services</h3>
+              <p>
+                Ask the check before your agent pays a supplier, or accept agent payments
+                through any POS that carries it. The evidence travels with the payment.
+              </p>
+              <a class="card-link" href="#partner">Get in touch →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="live">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">Status, without the marketing</p>
+            <h2>What is live, what is rolling out, and what we do not cover.</h2>
+            <p>
+              A trust product that overstates its coverage is just another unclaimed
+              statement. This is the honest map.
+            </p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Live today</th>
+                  <th scope="col">Rolling out</th>
+                  <th scope="col">Not indexed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>Pre-payment check</strong>
+                    <span>REST API, remote MCP, and the offline PyPI package.</span>
+                  </td>
+                  <td>
+                    <strong>Solana x402 rail</strong>
+                    <span>Indexed from a seven-day window (18–25 Nov 2026), classified by a public fee-payer allowlist.</span>
+                  </td>
+                  <td>
+                    <strong>Lightning and MPP</strong>
+                    <span>A query returns <code>rail_not_indexed</code> — missing coverage, not a negative finding.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Base x402 index</strong>
+                    <span>2.39M+ settled payments and 19,397 sellers at the November 2026 build.</span>
+                  </td>
+                  <td>
+                    <strong>Partner integrations</strong>
+                    <span>POS, wallet and agent-platform partners carrying the check with their product.</span>
+                  </td>
+                  <td>
+                    <strong>A verdict</strong>
+                    <span>No score, badge, or approval to pay. The interpretation is one input.</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="why-us">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">Why Zapproof</p>
+            <h2>Neutral by construction, honest by default.</h2>
+          </div>
+          <div class="grid grid-4">
+            <article class="card">
+              <h3>Read-only</h3>
+              <p>No funds held, no checkout of our own, no payments routed, no token, and no way to buy standing.</p>
+            </article>
+            <article class="card">
+              <h3>Evidence with limits</h3>
+              <p>Every answer carries its evidence and its limits; missing evidence is never rendered as a low score.</p>
+            </article>
+            <article class="card">
+              <h3>Cross-rail</h3>
+              <p>Base x402 today, plus a seven-day Solana x402 window. Lightning and MPP are outside the index, and the answer says so.</p>
+            </article>
+            <article class="card">
+              <h3>Measured honestly</h3>
+              <p>Blinded adjudication agreed about 62% of the time (83% excluding abstentions); the adjudicators were language models, not humans.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dark" id="partner">
+        <div class="wrap">
+          <div class="cta">
+            <p class="kicker">Partners</p>
+            <h2>Bring the check into your checkout.</h2>
+            <p>
+              We partner with POS providers, wallets, and agent platforms: carry our MCP
+              server and skill, and your agents get a check before they pay. You keep
+              custody and settlement; we never hold funds. If agents pay through you,
+              this is how they check before pay.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="https://github.com/noareyenoar">Talk to the founder</a>
+              <a class="btn btn-ghost" href="__BASE_URL__/agents/">Agent docs</a>
+              <a class="btn btn-ghost" href="__API_URL__/v1/methodology">Methodology</a>
+            </div>
+            <p class="tiny">
+              No sign-up, no wallet, and no key to read the check. The hosted index is free
+              today; a 1-sat toll is being brought online.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="note">
+          <strong>Zapproof</strong> · the trust rail for agent commerce.<br>
+          Zapproof is read-only and non-custodial. It does not hold or move funds and does
+          not operate a point of sale. Its interpretation is rules-based and not
+          independently validated; use it as one input among several, never as an approval
+          to pay.
+        </div>
+        <nav aria-label="Footer">
+          <a href="__BASE_URL__/agents/">For agents</a>
+          <a href="__API_URL__/v1/methodology">Methodology</a>
+          <a href="__API_URL__/openapi.json">OpenAPI</a>
+          <a href="__BASE_URL__/payments-vs-trust/">Why evidence matters</a>
+          <a href="__BASE_URL__/th/" hreflang="th" lang="th">ภาษาไทย</a>
+          <a href="https://github.com/noareyenoar">GitHub</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

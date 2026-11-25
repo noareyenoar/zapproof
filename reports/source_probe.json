@@ -1,0 +1,229 @@
+{
+  "_provenance": {
+    "note": "Phase 0 task 0.3. Every value under `sources` was measured against the live source on 2026-10-16/17 from the owner's machine, or transcribed from a measurement recorded in docs/protocol_notes.md and reports/backfill_measurements.json. Vendor terms text is quoted verbatim.",
+    "produced_by": "scripts/sample_settlements.py, scripts/token_census.py, scripts/backfill_projection.py",
+    "terms_reviewed": "2026-10-23",
+    "terms_review_is_complete": true,
+    "terms_review_note": "The owner decided the whole terms question on 2026-10-23: every source used is accepted as fair use. Each source carries a terms_decision block recording that. This is the owner's judgement, not a formal legal opinion; Phase D's legal signoff still applies.",
+    "data_model": "`sources` holds candidates that are technically usable and therefore carry a projected cost for us. `eliminated` holds candidates ruled out before use; they cost us nothing because we do not use them, and keeping them out of `sources` stops a paid source we never touch from inflating the projected spend."
+  },
+  "sources": [
+    {
+      "name": "tenderly-public-rpc",
+      "url": "https://gateway.tenderly.co/public/base",
+      "usable": true,
+      "independent": false,
+      "independence_note": "Reads the same chain as thirdweb-public-rpc and passes through Zapproof's own decoder. Agreement between the two is a self-comparison, which prompt Section 6 forbids as a substitute for a cross-check. Admits infrastructure faults only.",
+      "auth_required": "none — keyless public endpoint",
+      "free_tier_notes": "No account needed. Documented cap of 1 GB per IP per day of response bytes; it counts bytes returned, not requests.",
+      "rate_limit": "50 consecutive 1,000-block eth_getLogs calls completed with zero errors at about 2.0 s each, unpaced. A 25-call JSON-RPC batch is rejected with HTTP 429.",
+      "max_block_range_per_request": 1000,
+      "max_results_per_request": 20000,
+      "measured_latency_ms": 1400,
+      "terms": "Terms of Service contain a 'Prohibited Uses' list; at least one item reads '(xii) attempt to gain unauthorized access to the Tenderly Platform'. The full list was NOT read. Whether bulk read-only eth_getLogs against the public endpoint falls under any prohibited item is UNRESOLVED.",
+      "terms_url": "https://tenderly.co/terms-of-service",
+      "terms_status": "OWNER ACCEPTED 2026-10-23 — the owner was shown the partial reading and the quoted Prohibited Uses item, and decided that read-only bulk use of the public endpoint is fair use and not a violation. The owner's judgement, not a formal legal opinion; Phase D's legal signoff still applies.",
+      "terms_decision": {
+        "decided_by": "owner",
+        "date": "2026-10-23",
+        "decision": "accepted",
+        "owner_stated_reason": "fair use, no problem",
+        "scope": "the whole source-probe terms question was decided in one go, on the same basis as Thirdweb",
+        "caveat": "A judgement, not a legal review. Phase D's D_LEGAL_SIGNOFF still applies."
+      },
+      "projected_monthly_cost_usd": 0,
+      "verification": "used for the 7-day token census (633,877 events) and for eth_call verification of USDC, the Permit2 proxy and the FacilitatorRegistry"
+    },
+    {
+      "name": "thirdweb-public-rpc",
+      "url": "https://8453.rpc.thirdweb.com",
+      "usable": true,
+      "independent": false,
+      "independence_note": "Same as tenderly-public-rpc — same chain, same decoder. Not admissible for G0.3.",
+      "auth_required": "none — keyless public endpoint",
+      "free_tier_notes": "No account needed. No documented byte allowance found.",
+      "rate_limit": "Accepts JSON-RPC batches of 25 receipt calls (25/25 returned); rejects a batch of 100 with HTTP 413. Measured 29.4 ms per receipt batched versus 475.1 ms unbatched over the same window.",
+      "max_block_range_per_request": 1000,
+      "max_batch_size_measured": 25,
+      "terms": "Terms of Service state: 'You agree not to scrape any content from the Software or use any automated means to access, download or gather information from the Software other than such automated means which may be intentionally made available by the Company'. A public JSON-RPC endpoint is arguably an automated means intentionally made available, but that is an interpretation and not a certainty.",
+      "terms_url": "https://thirdweb.com/terms",
+      "terms_status": "OWNER ACCEPTED 2026-10-23 — the owner was shown the quoted restriction and decided that bulk read-only RPC use falls within the 'automated means intentionally made available' carve-out, and that it is good use and lawful. This is the owner's judgement, not a formal legal opinion; prompt Phase D still requires legal signoff before public release.",
+      "terms_decision": {
+        "decided_by": "owner",
+        "date": "2026-10-23",
+        "decision": "accepted",
+        "owner_stated_reason": "good use and does not violate the law",
+        "caveat": "A judgement, not a legal review. Phase D's D_LEGAL_SIGNOFF still applies."
+      },
+      "projected_monthly_cost_usd": 0,
+      "verification": "used for the backfill projection's batched receipt measurements"
+    },
+    {
+      "name": "substreams-x402-base-pulse",
+      "url": "base-mainnet.streamingfast.io:443",
+      "package": "x402-base-pulse@v3.3.0",
+      "usable": false,
+      "unusable_reason": "Does not complete. map_x402_settlements depends on store_facilitator_registry, which Substreams must compute from block 22,666,000 before any settlement can be read — 21,900,000 blocks of preparation. Four attempts (25 min, 40 min, about 1 h, and a full 4 h) produced no settlement data; the best cache accumulation observed was 770,000 blocks in about 4 hours. See reports/failure_analysis_g0_3.md.",
+      "independent": true,
+      "independence_note": "A third-party Rust/WASM decoder with its own gating logic, so it IS a genuinely independent decode and the only zero-cost candidate found. Marked unusable because it does not complete, not because it is not independent.",
+      "auth_required": "JWT or API key from thegraph.market. Verified working with the owner's key on 2026-10-16: authentication succeeds and the stream connects. It then fails on store-preparation time, not on auth.",
+      "free_tier_notes": "thegraph.market free tier: '7M blocks and 5 GiB egress included, no credit card required'. Store preparation alone needs 21.9M blocks, about 3.1x the entire monthly allowance.",
+      "rate_limit": "2 concurrent streams. Killed runs hold their session server-side for a while, so attempts interfere.",
+      "max_block_range_per_request": null,
+      "terms": "OWNER ACCEPTED 2026-10-23 as fair use. Not individually reviewed; used only to evaluate feasibility.",
+      "terms_url": "https://thegraph.market/",
+      "terms_status": "OWNER ACCEPTED 2026-10-23 — not individually reviewed; the owner decided the whole terms question as fair use on the same basis as Thirdweb. Evaluated as a feasibility test only.",
+      "terms_decision": {
+        "decided_by": "owner",
+        "date": "2026-10-23",
+        "decision": "accepted",
+        "owner_stated_reason": "fair use, no problem",
+        "caveat": "A judgement, not a legal review. Phase D's D_LEGAL_SIGNOFF still applies."
+      },
+      "projected_monthly_cost_usd": 0,
+      "verification": "authentication and streaming verified; map_facilitator_registry_events streamed 100 blocks in 3 s. map_x402_settlements never completed."
+    },
+    {
+      "name": "cdp-x402-discovery",
+      "url": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources",
+      "usable": true,
+      "independent": true,
+      "independence_note": "Independent of Zapproof, but it is a catalogue of advertised services, not a settlement ledger. It carries no counts and no amounts, so it cannot satisfy G0.3 at all.",
+      "auth_required": "none — HTTP 200, 381,214 bytes, no key",
+      "free_tier_notes": "Public, keyless read.",
+      "rate_limit": "30 unpaced sequential GETs completed 30/30 with no 429 at about 0.8 requests per second (latency-bound, not throttled). Measured 2026-10-23.",
+      "rate_limit_measured_at": "2026-10-23",
+      "max_block_range_per_request": null,
+      "content_summary": "100 advertised services. Base entries: 133, all USDC at 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913. Base schemes: exact 110, batch-settlement 21, upto 2. Also lists 2 Lightning (lnbtc:) entries for api.bitrefill.com carrying bolt11 invoices.",
+      "terms": "OWNER ACCEPTED 2026-10-23 as fair use. Not individually reviewed; read-only GET of a public discovery endpoint.",
+      "terms_url": "https://docs.cdp.coinbase.com/x402",
+      "terms_status": "OWNER ACCEPTED 2026-10-23 — not individually reviewed; the owner decided the whole terms question as fair use on the same basis as Thirdweb. Read-only GET of a public discovery endpoint.",
+      "terms_decision": {
+        "decided_by": "owner",
+        "date": "2026-10-23",
+        "decision": "accepted",
+        "owner_stated_reason": "fair use, no problem",
+        "caveat": "A judgement, not a legal review. Phase D's D_LEGAL_SIGNOFF still applies."
+      },
+      "projected_monthly_cost_usd": 0,
+      "verification": "fetched repeatedly on 2026-10-16/17; supplied the advertised side of the token census"
+    }
+  ],
+  "eliminated": [
+    {
+      "name": "bitquery-graphql",
+      "usable": false,
+      "independent": true,
+      "reason": "Not free. No permanently free plan: a 7-day real-time-only trial on paid plans, archive history excluded. Paid from $29/month annually or $49 month-to-month, plus historical add-ons from $70/month.",
+      "unit_cost_if_used": "$29+/month",
+      "terms_status": "NOT REVIEWED — eliminated on cost before review",
+      "evidence_url": "https://bitquery.io/pricing"
+    },
+    {
+      "name": "x402scan-api",
+      "usable": false,
+      "independent": true,
+      "reason": "Paid per request. Endpoints return HTTP 402 with a decoded requirement of 10,000 USDC base units, i.e. $0.01 per request, payable in USDC. Any non-trivial cross-check would spend real money and need a funded wallet, violating both the zero-cost cap and the read-only rule.",
+      "unit_cost_if_used": "$0.01 per request",
+      "terms_status": "NOT REVIEWED — eliminated on cost",
+      "evidence_url": "https://www.x402scan.com/openapi.json"
+    },
+    {
+      "name": "x402-omnigraph-subgraph",
+      "usable": false,
+      "independent": true,
+      "reason": "Not deployed. Its own README lists Base as 'Syncing' with Studio 'In Process'; last commit 2026-05-28. It also gates solely on the on-chain FacilitatorRegistry, which x402-base-pulse documents as producing empty output in practice.",
+      "unit_cost_if_used": "unknown",
+      "terms_status": "NOT REVIEWED — not deployed",
+      "evidence_url": "https://github.com/PaulieB14/x402-omnigraph"
+    },
+    {
+      "name": "dune",
+      "usable": false,
+      "independent": true,
+      "reason": "Free tier restricted to view-only from 2026-09-10; queries need a paid plan from about $65/month.",
+      "unit_cost_if_used": "$65+/month",
+      "terms_status": "NOT REVIEWED — eliminated on cost",
+      "evidence_url": "https://dune.com/pricing"
+    },
+    {
+      "name": "base-org-public-rpc",
+      "url": "https://mainnet.base.org",
+      "usable": false,
+      "independent": false,
+      "reason": "Returns {\"code\": -32011, \"message\": \"request limit reached\"} for eth_getLogs on a 1,000-block range, while eth_blockNumber on the same endpoint answers normally — so eth_getLogs specifically is rationed below what ingestion needs.",
+      "unit_cost_if_used": "0",
+      "terms_status": "NOT REVIEWED",
+      "evidence_url": "measured"
+    },
+    {
+      "name": "blockscout-base",
+      "usable": false,
+      "independent": true,
+      "reason": "base.blockscout.com returns HTTP 403 behind a Cloudflare challenge ('Just a moment...') on every endpoint tried, with and without a browser user-agent. Confirmed twice: by the independent reviewer on 2026-10-17 and by the agent on 2026-10-23. Blockscout's Ethereum instance (eth.blockscout.com) answers HTTP 200, so the block is specific to how the Base instance is fronted, not a general outage.",
+      "unit_cost_if_used": "0",
+      "terms_status": "NOT REVIEWED",
+      "measured_by": "independent reviewer 2026-10-17; re-confirmed by the agent 2026-10-23",
+      "note": "The agent's own task 0.3 probe never tried this source. Independent review pointed out the elimination table was therefore incomplete. Recorded here so the negative is supported by a measurement rather than by omission."
+    },
+    {
+      "name": "routescan-base",
+      "usable": false,
+      "independent": true,
+      "reason": "Public API returned {\"status\":\"0\",\"message\":\"chain not supported\"} for chain 8453, and 403 on its other host.",
+      "unit_cost_if_used": "0",
+      "terms_status": "NOT REVIEWED",
+      "measured_by": "the independent reviewer (reports/review_0.md §5.2), not re-measured by the agent",
+      "note": "Same omission as blockscout-base."
+    },
+    {
+      "name": "etherscan-v2-basescan",
+      "usable": false,
+      "independent": true,
+      "reason": "Base mainnet is PAID TIER ONLY on Etherscan V2. Measured directly against the API on 2026-10-23 without needing a valid key, because the tier check runs before the key check: chainid=8453 returns 'Free API access is not supported for this chain. Please upgrade your api plan for full chain coverage.' Controls: chainid=1 returns 'Invalid API Key (#err2)' (supported, key just needed), and chainid=10 returns the same paid-tier message, matching its published status. chainid=84532 (Base Sepolia) returns 'Invalid API Key', so testnet is free but carries no real settlements.",
+      "unit_cost_if_used": "Lite plan — 25% of the previous lowest paid tier; amount not stated publicly",
+      "terms_status": "NOT REVIEWED",
+      "measured_by": "agent, 2026-10-23, via api.etherscan.io/v2/api",
+      "note": "The owner supplied an ETHERSCAN_API_KEY on 2026-10-23 in good faith after this was raised as the cheapest remaining lead. It cannot be used for Base on the free tier. The key is harmless to keep; it is simply not a path to G0.3.",
+      "evidence_url": "https://api.etherscan.io/v2/api?chainid=8453&module=proxy&action=eth_blockNumber"
+    },
+    {
+      "name": "blockscout-unified-api",
+      "usable": false,
+      "independent": true,
+      "reason": "Returns HTTP 402: 'Proceed with API key or make a X402 payment to continue'. Blockscout's own unified API is monetised with x402 — the same protocol this project indexes.",
+      "unit_cost_if_used": "x402 payment or an API key of unknown tier",
+      "terms_status": "NOT REVIEWED",
+      "measured_by": "agent, 2026-10-23",
+      "evidence_url": "https://api.blockscout.com/v2/api?chainid=8453"
+    }
+  ],
+  "cross_check_outcome": {
+    "independent_sources_that_complete": 0,
+    "gate_check_g0_3": "FAIL — not because the analysis is wrong, but because no second independent source completes at zero cost",
+    "see": "reports/failure_analysis_g0_3.md",
+    "owner_decision": {
+      "decided_by": "owner",
+      "date": "2026-10-23",
+      "option_chosen": "narrow the claim — proceed without an independent cross-check, stating the limitation wherever the numbers are published",
+      "owner_stated_reason": "accept that independent verification is not achievable at zero cost and continue",
+      "consequence": "Every published settlement count must say it is not independently cross-verified. This is a limitation of the verification, not of the decode: the decode itself was validated two ways (1,285 rows against chain, and 1,170 calldata-vs-event comparisons by the independent reviewer).",
+      "gate_effect": "G0.3 remains FAIL as a measured fact. The phase may proceed only via GATES/0_DECISION.md, which only the owner can create."
+    }
+  },
+  "human_decisions_required": [],
+  "human_decisions_made": [
+    {
+      "date": "2026-10-23",
+      "topic": "terms of use",
+      "decision": "all sources accepted as fair use",
+      "outcome": "G0.5 has no unresolved terms"
+    },
+    {
+      "date": "2026-10-23",
+      "topic": "G0.3",
+      "decision": "narrow the claim — proceed without an independent cross-check and state the limitation",
+      "outcome": "G0.3 stays FAIL as a measured fact; the phase proceeds via GATES/0_DECISION.md"
+    }
+  ]
+}

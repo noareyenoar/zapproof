@@ -1,0 +1,16 @@
+# gcloud builds submit uploads this tree. The ingest database stays local; the
+# compact hosted database is the only database the image needs.
+.git
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+data/repindex.db
+data/usage.db
+data/*.db-wal
+data/*.db-shm
+reports
+public
+.deploy
+tmp

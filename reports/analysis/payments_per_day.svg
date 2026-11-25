@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" width="760" height="380" role="img" aria-labelledby="t d" font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+<title id="t">Settled payments per day</title>
+<desc>Line chart of daily settled payment counts from 2026-10-21 to 2026-10-28.</desc>
+
+<style>
+.surface{fill:#fcfcfb}
+.ink{fill:#0b0b0b}
+.secondary{fill:#52514e}
+.muted{fill:#898781}
+.grid{stroke:#e1e0d9;stroke-width:1}
+.axis{stroke:#c3c2b7;stroke-width:1}
+.series{fill:#2a78d6;stroke:#2a78d6}
+.series-fill{fill:#2a78d6;fill-opacity:.10;stroke:none}
+.line{fill:none;stroke:#2a78d6;stroke-width:2}
+.ring{stroke:#fcfcfb;stroke-width:2}
+@media (prefers-color-scheme: dark){
+.surface{fill:#1a1a19}
+.ink{fill:#f0efec}
+.secondary{fill:#c3c2b7}
+.muted{fill:#898781}
+.grid{stroke:#2c2c2a}
+.axis{stroke:#383835}
+.series{fill:#3987e5;stroke:#3987e5}
+.series-fill{fill:#3987e5}
+.line{stroke:#3987e5}
+.ring{stroke:#1a1a19}
+}
+</style>
+
+<rect class="surface" width="760" height="380" rx="8"/>
+<text class="ink" x="28" y="34" font-size="17" font-weight="600">Settled payments per day</text>
+<text class="secondary" x="28" y="56" font-size="12">Payments observed on Base from 2026-10-21 to 2026-10-28.</text>
+<line class="grid" x1="74" y1="328.0" x2="726" y2="328.0"/>
+<text class="muted" x="64" y="328.0" font-size="11" text-anchor="end" dominant-baseline="middle" style="font-variant-numeric:tabular-nums">0</text>
+<line class="grid" x1="74" y1="248.0" x2="726" y2="248.0"/>
+<text class="muted" x="64" y="248.0" font-size="11" text-anchor="end" dominant-baseline="middle" style="font-variant-numeric:tabular-nums">200k</text>
+<line class="grid" x1="74" y1="168.0" x2="726" y2="168.0"/>
+<text class="muted" x="64" y="168.0" font-size="11" text-anchor="end" dominant-baseline="middle" style="font-variant-numeric:tabular-nums">400k</text>
+<line class="grid" x1="74" y1="88.0" x2="726" y2="88.0"/>
+<text class="muted" x="64" y="88.0" font-size="11" text-anchor="end" dominant-baseline="middle" style="font-variant-numeric:tabular-nums">600k</text>
+<path class="series-fill" d="M 74.0 267.3 L 167.1 166.9 L 260.3 131.8 L 353.4 243.2 L 446.6 182.2 L 539.7 208.6 L 632.9 218.8 L 726.0 249.6 L 726.0 328.0 L 74.0 328.0 Z"/>
+<path class="line" d="M 74.0 267.3 L 167.1 166.9 L 260.3 131.8 L 353.4 243.2 L 446.6 182.2 L 539.7 208.6 L 632.9 218.8 L 726.0 249.6"/>
+<circle class="series ring" cx="74.0" cy="267.3" r="4"/>
+<circle class="series ring" cx="167.1" cy="166.9" r="4"/>
+<circle class="series ring" cx="260.3" cy="131.8" r="4"/>
+<circle class="series ring" cx="353.4" cy="243.2" r="4"/>
+<circle class="series ring" cx="446.6" cy="182.2" r="4"/>
+<circle class="series ring" cx="539.7" cy="208.6" r="4"/>
+<circle class="series ring" cx="632.9" cy="218.8" r="4"/>
+<circle class="series ring" cx="726.0" cy="249.6" r="4"/>
+<text class="muted" x="74.0" y="350" font-size="11" text-anchor="middle">Oct 21</text>
+<text class="muted" x="167.1" y="350" font-size="11" text-anchor="middle">Oct 22</text>
+<text class="muted" x="260.3" y="350" font-size="11" text-anchor="middle">Oct 23</text>
+<text class="muted" x="353.4" y="350" font-size="11" text-anchor="middle">Oct 24</text>
+<text class="muted" x="446.6" y="350" font-size="11" text-anchor="middle">Oct 25</text>
+<text class="muted" x="539.7" y="350" font-size="11" text-anchor="middle">Oct 26</text>
+<text class="muted" x="632.9" y="350" font-size="11" text-anchor="middle">Oct 27</text>
+<text class="muted" x="726.0" y="350" font-size="11" text-anchor="middle">Oct 28</text>
+<text class="secondary" x="260.3" y="117.8" font-size="11" text-anchor="middle" style="font-variant-numeric:tabular-nums">490,413</text>
+<text class="secondary" x="730.0" y="235.6" font-size="11" text-anchor="end" style="font-variant-numeric:tabular-nums">196,047</text>
+<line class="axis" x1="74" y1="328" x2="726" y2="328"/>
+</svg>

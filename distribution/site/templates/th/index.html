@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zapproof — trust rail ของ agent commerce</title>
+    <meta name="description" content="Zapproof คือ trust rail ของ agent commerce — การตรวจหลักฐานการชำระเงินแบบอ่านอย่างเดียวก่อนที่ agent จะจ่าย ผ่าน rail หรือจุดรับชำระเงินใดก็ได้ ฟรีวันนี้">
+    <link rel="canonical" href="__BASE_URL__/th/">
+    <link rel="alternate" hreflang="en" href="__BASE_URL__/">
+    <link rel="alternate" hreflang="th" href="__BASE_URL__/th/">
+    <link rel="alternate" hreflang="x-default" href="__BASE_URL__/">
+    <link rel="stylesheet" href="__BASE_URL__/assets/site.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Zapproof",
+            "url": "__BASE_URL__/th/",
+            "description": "ดัชนีหลักฐานการชำระเงินแบบอ่านอย่างเดียว และ trust rail สำหรับ agent commerce",
+            "sameAs": [
+              "https://github.com/noareyenoar",
+              "https://github.com/noareyenoar/zapproof",
+              "https://pypi.org/project/zapproof-mcp/",
+              "https://glama.ai/mcp/servers/noareyenoar/zapproof"
+            ]
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "Zapproof Check",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Any",
+            "description": "MCP server และ API แบบอ่านอย่างเดียวที่คืนหลักฐานการชำระเงินที่ settled แล้วของคู่ค้า ก่อนที่ agent จะจ่ายเงิน",
+            "url": "__BASE_URL__/agents/th/",
+            "codeRepository": "https://github.com/noareyenoar/zapproof",
+            "softwareVersion": "0.1.3",
+            "license": "https://opensource.org/licenses/MIT",
+            "isAccessibleForFree": true,
+            "inLanguage": "th"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">ข้ามไปเนื้อหา</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="__BASE_URL__/th/">
+          <svg viewBox="0 0 400 400" aria-hidden="true">
+            <g fill="none" stroke="#0B1220" stroke-linecap="round">
+              <path d="M96 200H268" stroke-width="22"/>
+              <path d="M268 136V264" stroke-width="26"/>
+            </g>
+            <circle cx="224" cy="200" r="20" fill="#2F6BFF"/>
+          </svg>
+          <span>Zapproof<small>Trust rail</small></span>
+        </a>
+        <nav class="nav" aria-label="เมนูหลัก">
+          <a href="#products">การตรวจ</a>
+          <a href="#how">วิธีการทำงาน</a>
+          <a href="#live">สถานะจริง</a>
+          <a href="__BASE_URL__/agents/th/">สำหรับ agent</a>
+          <a class="lang" href="__BASE_URL__/" hreflang="en" lang="en">EN</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="wrap">
+          <div>
+            <p class="eyebrow">Trust rail · ตรวจก่อนจ่าย</p>
+            <h1>trust rail ของ agent commerce</h1>
+            <p class="lede">
+              agent จ่ายเงินได้ในไม่กี่วินาที ผ่าน rail หรือจุดรับชำระเงินใดก็ได้
+              Zapproof คือจุดตรวจที่เป็นกลางในเส้นทาง: คู่ค้ารายนี้มีหลักฐาน
+              การชำระเงินอะไรอยู่ — และหลักฐานนั้นไม่ได้พิสูจน์อะไร?
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#how">วิธีการทำงาน</a>
+              <a class="btn btn-ghost" href="__BASE_URL__/agents/th/">เอกสารสำหรับ agent</a>
+            </div>
+            <div class="chips">
+              <span class="chip chip-live"><span class="dot"></span>พร้อมใช้วันนี้ · การตรวจก่อนจ่าย</span>
+              <span class="chip chip-pilot"><span class="dot"></span>เปิดรับ partner · POS และกระเป๋าเงิน</span>
+            </div>
+          </div>
+
+          <aside class="hero-card" aria-label="ตัวอย่างคำตอบจากการตรวจ">
+            <p class="mock-label">402 · คำขอชำระเงิน</p>
+            <div class="mock-row"><span>จำนวน</span><strong>1 sat</strong></div>
+            <div class="mock-row"><span>ผู้รับเงิน</span><code>0x7a…f3</code></div>
+            <div class="mock-divider"></div>
+            <p class="mock-label">Zapproof check</p>
+            <div class="mock-row"><span>settlements</span><strong>1,284</strong></div>
+            <div class="mock-row"><span>payers ที่แตกต่าง</span><strong>212</strong></div>
+            <div class="mock-row"><span>วันที่เคลื่อนไหว</span><strong>84</strong></div>
+            <div class="mock-row"><span>operator groups</span><strong>3</strong></div>
+            <p class="mock-hash mono">evidence_hash · sha256:9f2c…7b41</p>
+            <p class="tiny">ตัวอย่างฟิลด์ในคำตอบ ไม่ใช่ผลตรวจสด — คำตอบให้หลักฐานพร้อมข้อจำกัด ไม่ใช่การอนุมัติให้จ่าย</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="why">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">ทำไมต้องตอนนี้</p>
+            <h2>การชำระเงินกำลังเข้าสู่ production แต่ความน่าเชื่อถือยังตามไม่ทัน</h2>
+            <p>
+              agent อ่าน 402 challenge เซ็นจ่าย แล้ว retry ได้ในไม่กี่วินาที —
+              ความเร็วนั้นมีประโยชน์ และทำให้คำถามต่อไปเลี่ยงไม่ได้
+            </p>
+          </div>
+          <div class="grid grid-3">
+            <article class="card">
+              <h3>agent จ่ายให้คนแปลกหน้า</h3>
+              <p>
+                ธุรกรรมที่ไม่มีคนเฝ้า ไม่มีแคชเชียร์ ไม่มีโต๊ะรับเรื่องร้องเรียน
+                และไม่มีใครให้ถามว่าคู่ค้ารายนี้ควรจ่ายหรือไม่
+              </p>
+            </article>
+            <article class="card">
+              <h3>การชำระที่ settled แล้วคือหลักฐาน</h3>
+              <p>
+                มันพิสูจน์ว่าเงินเคลื่อนจริง แต่ไม่ได้พิสูจน์ว่าจะส่งของ
+                และไม่ได้บอกว่าใครอยู่อีกฝั่ง
+              </p>
+            </article>
+            <article class="card">
+              <h3>ไม่พบข้อมูล ไม่ใช่เรื่องแย่</h3>
+              <p>
+                ผู้ขายใหม่ยังไม่มีบันทึก การตีความว่าไม่มีหลักฐานคือคะแนนต่ำ
+                จะลงโทษคนใหม่ที่ซื่อตรงและให้รางวัลกับสัญญาณผิด
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="products">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">ผลิตภัณฑ์เดียว หลาย partner</p>
+            <h2>การตรวจไปกับทุกที่ที่ agent จ่าย</h2>
+            <p>
+              Zapproof เป็น trust layer ไม่ใช่เช็กเอาต์ ผู้ให้บริการ POS กระเป๋าเงิน
+              และ payment rail เป็นคนพาการตรวจไปกับผลิตภัณฑ์ของเขา; agent ของเขา
+              ถามก่อนเซ็น เราไม่ถือเงินและไม่ได้เปิดจุดรับชำระเงินของตัวเอง
+            </p>
+          </div>
+          <div class="grid grid-2">
+            <article class="card">
+              <span class="label label-live"><span class="dot"></span>พร้อมใช้วันนี้</span>
+              <h3>Zapproof Check</h3>
+              <p>
+                คำตอบแบบอ่านอย่างเดียวสำหรับคำถามเดียว: คู่ค้ารายนี้มีหลักฐาน
+                การชำระเงินอะไรอยู่ — และหลักฐานนั้นไม่ได้พิสูจน์อะไร?
+              </p>
+              <ul>
+                <li>หลักฐานการชำระ x402 บน Base หลายล้านรายการ พร้อมจำนวน payers, วันที่เคลื่อนไหว และ operator groups</li>
+                <li>rail x402 บน Solana ถูก index จากหน้าต่าง 7 วัน; Lightning และ MPP ยังไม่ถูก index</li>
+                <li>MCP tool เดียว <code>check_counterparty</code>; REST API; และแพ็กเกจ offline สำหรับ agent ที่ไม่ต้องมี key หรือ wallet</li>
+                <li>ฟรีวันนี้ — toll 1 sat กำลังเปิดใช้</li>
+              </ul>
+              <a class="card-link" href="__BASE_URL__/agents/th/">สำหรับ agent และนักพัฒนา →</a>
+            </article>
+
+            <article class="card">
+              <span class="label label-design"><span class="dot"></span>เปิดรับ partner · pilot</span>
+              <h3>พาการตรวจไปกับคุณ</h3>
+              <p>
+                ถ้า agent จ่ายเงินผ่าน POS กระเป๋าเงิน หรือ rail ของคุณ
+                พา trust layer ไปด้วย: เผยแพร่ MCP server และ skill ของเรา
+                ควบคู่ผลิตภัณฑ์ เพื่อให้ทุก agent ตรวจก่อนจ่ายได้
+              </p>
+              <ul>
+                <li>HTTPS call เดียวหรือ MCP tool เดียวที่เช็กเอาต์ — ไม่ต้องมี key ไม่ต้องมี wallet และอ่านอย่างเดียว</li>
+                <li>แพ็ก MCP server และ skill ของเราไปกับการเชื่อมต่อของคุณ; agent ของคุณได้การตรวจโดยไม่ต้องเพิ่ม vendor ที่สอง</li>
+                <li>คุณถือเงินและ settle เอง — Zapproof ไม่ถือหรือเคลื่อนย้ายเงิน และไม่มีค่าธรรมเนียมในการพาการตรวจไปวันนี้</li>
+              </ul>
+              <a class="card-link" href="#partner">ร่วมเป็น partner →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">วิธีการทำงาน</p>
+            <h2>การตรวจอยู่ในเส้นทาง ไม่ใช่ผู้ตัดสินอยู่ข้างบน</h2>
+            <p>
+              ตำแหน่งที่มีประโยชน์ของสัญญาณความน่าเชื่อถือคือก่อนการเซ็น
+              เพราะมันเปลี่ยนการตัดสินใจได้และถูกบันทึกไว้
+            </p>
+          </div>
+          <div class="steps">
+            <article class="step">
+              <h3>คำขอชำระเงิน</h3>
+              <p>
+                agent ได้รับ 402 challenge หรือใบแจ้งหนี้ sats พร้อมผู้รับเงิน
+                จำนวน และ network
+              </p>
+            </article>
+            <article class="step">
+              <h3>ตรวจ</h3>
+              <p>
+                agent ถาม Zapproof ว่าผู้รับเงินรายนี้มีหลักฐานการชำระอะไรอยู่
+                พร้อมกฎและข้อจำกัดที่แนบมากับคำตอบ
+              </p>
+            </article>
+            <article class="step">
+              <h3>จ่ายผ่าน rail ใดก็ได้</h3>
+              <p>
+                จ่ายเป็น sats ผ่าน POS หรือกระเป๋าเงิน หรือเป็น USDC ผ่าน x402
+                แล้วการชำระนั้นกลายเป็นหลักฐานสำหรับการตรวจครั้งถัดไป
+                — ไม่ใช่คำสัญญาว่าครั้งนี้จะสำเร็จ
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="who">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">สำหรับใคร</p>
+            <h2>สร้างร่วมกับคนที่ agent จ่ายเงินผ่าน</h2>
+          </div>
+          <div class="grid grid-3">
+            <article class="card">
+              <h3>ผู้ให้บริการ POS และ payment</h3>
+              <p>
+                พาการตรวจไปกับเช็กเอาต์ของคุณด้วย HTTPS call เดียวหรือ MCP tool
+                เดียว — อ่านอย่างเดียว ไม่ต้องมี key ไม่ต้องมี wallet ฟรีวันนี้
+                และ agent ของคุณได้เหตุผลในการจ่ายผ่านคุณ
+              </p>
+              <a class="card-link" href="#partner">คุยกับเรา →</a>
+            </article>
+            <article class="card">
+              <h3>กระเป๋าเงินและแพลตฟอร์ม agent</h3>
+              <p>
+                ให้ agent มีการตรวจก่อนเซ็น: tool เดียว สถานะ unknown ที่ชัดเจน
+                และ hash ของคำตอบที่เก็บไว้เทียบครั้งต่อไปได้
+              </p>
+              <a class="card-link" href="__BASE_URL__/agents/th/">เชื่อมต่อ →</a>
+            </article>
+            <article class="card">
+              <h3>Merchant และบริการ agent</h3>
+              <p>
+                ให้ agent ถามการตรวจก่อนจ่ายซัพพลายเออร์ หรือรับชำระจาก agent
+                ผ่าน POS ใดก็ได้ที่พาการตรวจไปด้วย — หลักฐานไปกับการชำระทุกครั้ง
+              </p>
+              <a class="card-link" href="#partner">ติดต่อเรา →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="live">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">สถานะจริง ไม่ใช่การตลาด</p>
+            <h2>อะไรพร้อมใช้ อะไรกำลังเปิด และอะไรที่เรายังไม่ครอบคลุม</h2>
+            <p>
+              ผลิตภัณฑ์ด้านความน่าเชื่อถือที่พูดเกินขอบเขตของตัวเอง
+              ก็เป็นเพียงคำกล่าวอ้างที่ยังไม่ถูกตรวจสอบอีกคำกล่าวอ้างหนึ่ง นี่คือแผนที่ที่ตรงไปตรงมา
+            </p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">พร้อมใช้วันนี้</th>
+                  <th scope="col">กำลังเปิดใช้</th>
+                  <th scope="col">ยังไม่ถูก index</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>การตรวจก่อนจ่าย</strong>
+                    <span>REST API, remote MCP และแพ็กเกจ PyPI แบบ offline</span>
+                  </td>
+                  <td>
+                    <strong>rail x402 บน Solana</strong>
+                    <span>index จากหน้าต่าง 7 วัน (18–25 พ.ย. 2026) ด้วย fee-payer allowlist สาธารณะ</span>
+                  </td>
+                  <td>
+                    <strong>Lightning และ MPP</strong>
+                    <span>คำถามจะได้ <code>rail_not_indexed</code> — ขาดการครอบคลุม ไม่ใช่ข้อสรุปเชิงลบ</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>ดัชนี x402 บน Base</strong>
+                    <span>settled payments 2.39M+ และผู้ขาย 19,397 ราย ณ การ build พฤศจิกายน 2026</span>
+                  </td>
+                  <td>
+                    <strong>การเชื่อมต่อ partner</strong>
+                    <span>POS กระเป๋าเงิน และแพลตฟอร์ม agent ที่พาการตรวจไปกับผลิตภัณฑ์</span>
+                  </td>
+                  <td>
+                    <strong>คำตัดสิน</strong>
+                    <span>ไม่มีคะแนน ป้าย หรือการอนุมัติให้จ่าย — การตีความเป็นเพียงข้อมูลหนึ่ง</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="why-us">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">ทำไม Zapproof</p>
+            <h2>เป็นกลางโดยโครงสร้าง ตรงไปตรงมาโดยค่าเริ่มต้น</h2>
+          </div>
+          <div class="grid grid-4">
+            <article class="card">
+              <h3>อ่านอย่างเดียว</h3>
+              <p>ไม่ถือเงิน ไม่มีเช็กเอาต์ของตัวเอง ไม่ route การจ่าย ไม่มี token และไม่มีทางซื้อสถานะ</p>
+            </article>
+            <article class="card">
+              <h3>หลักฐานพร้อมข้อจำกัด</h3>
+              <p>ทุกคำตอบแนบหลักฐานและข้อจำกัด; ไม่มีหลักฐานจะไม่ถูกแสดงเป็นคะแนนต่ำ</p>
+            </article>
+            <article class="card">
+              <h3>ข้าม rail</h3>
+              <p>Base x402 วันนี้ พร้อมหน้าต่าง Solana x402 เจ็ดวัน — Lightning และ MPP อยู่นอก index และคำตอบบอกอย่างนั้น</p>
+            </article>
+            <article class="card">
+              <h3>วัดผลตามจริง</h3>
+              <p>การตัดสินแบบ blinded เห็นด้วยประมาณ 62% (83% เมื่อไม่นับ abstentions) และผู้ตัดสินเป็น language model ไม่ใช่มนุษย์</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dark" id="partner">
+        <div class="wrap">
+          <div class="cta">
+            <p class="kicker">Partner</p>
+            <h2>พาการตรวจไปกับเช็กเอาต์ของคุณ</h2>
+            <p>
+              เราร่วมงานกับผู้ให้บริการ POS กระเป๋าเงิน และแพลตฟอร์ม agent:
+              พา MCP server และ skill ของเราไปด้วย แล้ว agent ของคุณจะได้การตรวจ
+              ก่อนจ่าย คุณถือเงินและ settle เอง; เราไม่ถือเงิน
+              ถ้า agent จ่ายผ่านคุณ นี่คือวิธีที่เขา "ตรวจก่อนจ่าย"
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="https://github.com/noareyenoar">คุยกับผู้ก่อตั้ง</a>
+              <a class="btn btn-ghost" href="__BASE_URL__/agents/th/">เอกสาร agent</a>
+              <a class="btn btn-ghost" href="__API_URL__/v1/methodology">Methodology</a>
+            </div>
+            <p class="tiny">
+              ไม่ต้องสมัคร ไม่ต้องมี wallet และไม่ต้องมี key เพื่ออ่านผลตรวจ —
+              hosted index ฟรีวันนี้ และ toll 1 sat กำลังเปิดใช้
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="note">
+          <strong>Zapproof</strong> · trust rail ของ agent commerce<br>
+          Zapproof อ่านอย่างเดียวและไม่ถือเงิน (non-custodial) — ไม่ถือหรือเคลื่อนย้ายเงิน
+          และไม่ได้เปิดจุดรับชำระเงินของตัวเอง การตีความเป็นแบบ rules-based
+          และไม่ได้ถูกตรวจสอบอย่างอิสระ ใช้เป็นข้อมูลหนึ่งในหลาย ๆ อย่าง
+          ไม่ใช่การอนุมัติให้จ่าย
+        </div>
+        <nav aria-label="ลิงก์ท้ายหน้า">
+          <a href="__BASE_URL__/agents/th/">สำหรับ agent</a>
+          <a href="__API_URL__/v1/methodology">Methodology</a>
+          <a href="__API_URL__/openapi.json">OpenAPI</a>
+          <a href="__BASE_URL__/payments-vs-trust/">ทำไมหลักฐานจึงสำคัญ</a>
+          <a href="__BASE_URL__/" hreflang="en" lang="en">English</a>
+          <a href="https://github.com/noareyenoar">GitHub</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

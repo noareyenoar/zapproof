@@ -1,0 +1,6 @@
+# Known false positives, with the reason each one is not a secret. Gitleaks matches
+# fingerprints below; a comment documents why the entry is safe.
+
+# The USDC contract on Base is a public constant used as test data (a settlement's
+# `token` field). It grants nothing and is not a credential.
+tests/test_corrections.py:generic-api-key:38

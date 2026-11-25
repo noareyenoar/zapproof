@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "zapproof": {
+      "type": "http",
+      "url": "https://zapproof-hc75zyauja-uc.a.run.app/mcp"
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "gate": "0",
+  "generated": "2026-10-23T10:16:58+00:00",
+  "commit": "5633ad4516b01c0ca4f82a184f475e8d9facc156",
+  "data_snapshot_hash": "564302d294ebb55518458ca3c2c64f484c8e1cd54b56dfcf6e8c6ce6c3b297f4",
+  "thresholds_file": "config/thresholds.yaml",
+  "checks": [
+    {
+      "id": "G0.1",
+      "title": "`make env-check` passes and `reports/env.md` exists",
+      "status": "PASS",
+      "measured": "env-check exit code 0",
+      "threshold": "env-check exit code 0 and reports/env.md present and non-empty",
+      "evidence": [
+        "reports/env.md"
+      ],
+      "notes": [
+        "note: env-check re-run by this gate; verify the timestamp in reports/env.md matches the gate run if you need the exact snapshot."
+      ]
+    },
+    {
+      "id": "G0.2",
+      "title": "Decoded settlements meet the minimum, and a random sample re-verifies on-chain",
+      "status": "PASS",
+      "measured": "9115 decoded settlements; re-checked 50 on-chain on existence, block, payer, seller, amount, nonce and relayer: 50 matched, 0 missing, 0 mismatched, 0 transport errors",
+      "threshold": ">= 1000 decoded settlements; 50 random rows re-checked via eth_getTransactionReceipt with 100% match",
+      "evidence": [
+        "data/scratch.db"
+      ],
+      "notes": []
+    },
+    {
+      "id": "G0.3",
+      "title": "Two independent sources agree on settlement count and total amount",
+      "status": "FAIL",
+      "measured": "0 source(s) carry a measured cross-check window; 3 of 4 are usable at all (tenderly-public-rpc, thirdweb-public-rpc, cdp-x402-discovery)",
+      "threshold": "two independent sources, window 1h, both count and total amount within 2% relative difference",
+      "evidence": [
+        "reports/source_probe.json"
+      ],
+      "notes": [
+        "FEWER THAN TWO USABLE SOURCES. Prompt Section 6 is explicit: if only one source works, G0.3 FAILS and a self-comparison must not be substituted. This is kill criterion #1 — report it to the owner rather than working around it."
+      ]
+    },
+    {
+      "id": "G0.4",
+      "title": "Unresolved token/mechanism share is within the cap, and everything is listed",
+      "status": "PASS",
+      "measured": "11 tokens; token share 0.1015%; mechanism share 0.0043% (1,438,413 EIP-3009 settlements vs 62 Permit2 proxy events in the same window)",
+      "threshold": "unresolved share <= 2%, every token listed explicitly",
+      "evidence": [
+        "reports/token_census.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "G0.5",
+      "title": "Projected monthly cost is within budget, and terms and backfill projection exist",
+      "status": "PASS",
+      "measured": "projected total 0.0 USD/month across 4 sources",
+      "threshold": "projected monthly cost <= 0.0 USD, terms documented, projection present",
+      "evidence": [
+        "reports/source_probe.json",
+        "reports/backfill_projection.md"
+      ],
+      "notes": []
+    },
+    {
+      "id": "G0.6",
+      "title": "`docs/protocol_notes.md` cites enough real transactions, and ADR 0001 exists",
+      "status": "PASS",
+      "measured": "25 distinct transaction hashes cited (3 event topic hash(es) excluded)",
+      "threshold": ">= 20 distinct transaction hashes cited; ADR 0001 present",
+      "evidence": [
+        "docs/protocol_notes.md",
+        "docs/adr/0001-data-source.md"
+      ],
+      "notes": []
+    },
+    {
+      "id": "G0.7",
+      "title": "Independent reviewer subagent ran with no unresolved findings",
+      "status": "FAIL",
+      "measured": "review_1.md declares 10 unresolved finding(s)",
+      "threshold": "the newest reports/review_*.md declares 0 unresolved findings",
+      "evidence": [
+        "reports/review_0.md",
+        "reports/review_1.md"
+      ],
+      "notes": [
+        "unresolved findings count as FAIL (prompt rule 3.4.7). Resolve them or record why they are not resolvable."
+      ]
+    }
+  ],
+  "summary": {
+    "PASS": 5,
+    "FAIL": 2,
+    "WARN": 0,
+    "NEEDS_HUMAN": 0
+  }
+}

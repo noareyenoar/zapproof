@@ -1,0 +1,21 @@
+{
+  "hosting": {
+    "site": "zapproof",
+    "public": "public",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "headers": [
+      {
+        "source": "skill.md",
+        "headers": [{"key": "Content-Type", "value": "text/markdown; charset=utf-8"}]
+      },
+      {
+        "source": "llms.txt",
+        "headers": [{"key": "Content-Type", "value": "text/plain; charset=utf-8"}]
+      },
+      {
+        "source": "assets/**",
+        "headers": [{"key": "Cache-Control", "value": "public, max-age=3600"}]
+      }
+    ]
+  }
+}

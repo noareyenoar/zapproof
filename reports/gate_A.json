@@ -1,0 +1,189 @@
+{
+  "gate": "A",
+  "generated": "2026-11-23T16:33:14+00:00",
+  "commit": "d6d2a024e900e669b004f9c4d6a809d23a19264c",
+  "data_snapshot_hash": "4f12bb1cea0bffa8bf1fe7e496b9ec73299bddb953749c6ed720d4a080eef6b3",
+  "checks": [
+    {
+      "id": "GA.1",
+      "title": "Tests pass, ruff clean, mypy clean",
+      "status": "PASS",
+      "measured": "pytest exit 0, ruff exit 0, mypy exit 0",
+      "threshold": "pytest exit 0, ruff exit 0, mypy exit 0",
+      "evidence": [],
+      "notes": []
+    },
+    {
+      "id": "GA.2",
+      "title": "Zero duplicates, no nulls, exact amount round-trip",
+      "status": "PASS",
+      "measured": "2,389,053 rows; duplicates 0; nulls 0; round-trip failures 0; non-integer amounts 0",
+      "threshold": "duplicates <= 0; no nulls; raw->normalized->raw exact for every row",
+      "evidence": [
+        "data/repindex.db"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GA.3",
+      "title": "Agreement with a second source on several random windows",
+      "status": "PASS",
+      "measured": "3 windows, worst relative difference 0.0000%",
+      "threshold": "3 windows on different days; count and amount within 2%",
+      "evidence": [
+        "reports/crosscheck_A.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GA.4",
+      "title": "Coverage lists every token and mechanism, and the headline states the gap",
+      "status": "PASS",
+      "measured": "1 supported, 1 unsupported, unsupported share 0.1015%",
+      "threshold": "coverage lists supported and unsupported; headline states unsupported share",
+      "evidence": [
+        "reports/coverage.json",
+        "reports/coverage_report.md"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GA.5",
+      "title": "Rebuilding the derived tables twice produces identical scores",
+      "status": "PASS",
+      "measured": "hashes 713e8ca6c1986ed6… vs 713e8ca6c1986ed6…",
+      "threshold": "both rebuilds exit 0 and produce the same scores hash",
+      "evidence": [],
+      "notes": []
+    },
+    {
+      "id": "GA.6",
+      "title": "Ingestion rolls back and recovers from a reorg without duplicating",
+      "status": "PASS",
+      "measured": "pytest exit 0",
+      "threshold": "the reorg test exists and passes",
+      "evidence": [],
+      "notes": []
+    },
+    {
+      "id": "GA.7",
+      "title": "The classifier finds planted patterns without flagging synthetic genuine ones",
+      "status": "FAIL",
+      "measured": "recall 75.00%, synthetic-genuine FPR 0.00%",
+      "threshold": "recall >= 90%; false-positive rate <= 10%",
+      "evidence": [
+        "reports/planted_pattern_results.json"
+      ],
+      "notes": [
+        "recall 75.00% below 90%"
+      ]
+    },
+    {
+      "id": "GA.8",
+      "title": "Sensitivity analysis exists, and instability is stated in the headline if large",
+      "status": "PASS",
+      "measured": "max share shift 0.54 percentage points (limit 15.0)",
+      "threshold": "analysis present; instability stated in the headline if shift > 15.0pp",
+      "evidence": [
+        "reports/sensitivity.json",
+        "reports/genuine_vs_signaling_v0.md"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GA.9",
+      "title": "A random sample of the report's numbers reproduces",
+      "status": "PASS",
+      "measured": "10 commands sampled, 0 failed",
+      "threshold": "10 sampled commands reproduce their stated value exactly",
+      "evidence": [
+        "reports/genuine_vs_signaling_v0.md",
+        "reports/genuine_vs_signaling_v0.reproduce.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GA.10",
+      "title": "Language audit passes on generated reports",
+      "status": "PASS",
+      "measured": "10 reports scanned, 0 hit(s)",
+      "threshold": "no banned term used as an assertion in reports/ or public strings",
+      "evidence": [
+        "reports"
+      ],
+      "notes": []
+    },
+    {
+      "id": "GA.11",
+      "title": "Below-minimum evidence renders as insufficient_evidence, never as zero",
+      "status": "PASS",
+      "measured": "pytest exit 0",
+      "threshold": "a passing test proves the literal string is returned and no zero is",
+      "evidence": [],
+      "notes": []
+    },
+    {
+      "id": "GA.12",
+      "title": "Independent reviewer ran with no unresolved findings",
+      "status": "FAIL",
+      "measured": "review_A.md declares 10 unresolved finding(s)",
+      "threshold": "the newest reports/review_A*.md declares 0 unresolved findings",
+      "evidence": [
+        "reports/review_A.md"
+      ],
+      "notes": [
+        "unresolved findings count as FAIL (prompt rule 3.4.7)"
+      ]
+    },
+    {
+      "id": "GA.13",
+      "title": "Blinded adjudication agrees, and the adjudication itself can fail",
+      "status": "FAIL",
+      "measured": "28 flagged in sample; agreement 61.5% / 61.5%; inter-rater 0.0%; negative control 4.6%; abstention 26.2%; 0 advertised services flagged",
+      "threshold": ">= 10 flagged in sample; agreement >= 70% both adjudicators; inter-rater >= 70%; negative control <= 40%; no advertised service flagged; abstention <= 30%",
+      "evidence": [
+        "reports/adjudication/result.json",
+        "docs/SPOT_CHECK_RUBRIC.md"
+      ],
+      "notes": [
+        "agreement_adjudicator_1: 0.6154 against a threshold of 0.7",
+        "agreement_adjudicator_2: 0.6154 against a threshold of 0.7",
+        "inter_rater: 0.0 against a threshold of 0.7"
+      ]
+    }
+  ],
+  "summary": {
+    "PASS": 10,
+    "FAIL": 3,
+    "WARN": 0,
+    "NEEDS_HUMAN": 0
+  },
+  "source_tree_clean": false,
+  "dirty_source_paths": [
+    " M distribution/content/payments-vs-trust.md",
+    " M distribution/listings/README.md",
+    " M distribution/listings/cline-marketplace.md",
+    " M distribution/listings/cursor-directory.md",
+    " M distribution/listings/github.md",
+    " M distribution/listings/glama-claim.md",
+    " M distribution/site/templates/index.html",
+    " M distribution/site/templates/sitemap.xml",
+    " M distribution/site/templates/th/index.html",
+    " M docs/CROSS_RAIL_EVIDENCE.md",
+    " M docs/METHODOLOGY.md",
+    " M the internal department log",
+    " M the internal progress log",
+    " M reports/gate_A.json",
+    " M reports/gate_A.md",
+    " M reports/genuine_vs_signaling_v0.md",
+    " M scripts/generate_report.py",
+    "?? distribution/brand/",
+    "?? distribution/outreach/",
+    "?? distribution/public-repo/",
+    "?? distribution/site/templates/payments-vs-trust/",
+    "?? reports/GA3_GA7_2026-11-23.md",
+    "?? reports/crosscheck_A.json",
+    "?? scripts/crosscheck_second_source.py",
+    "?? scripts/export_public.py"
+  ]
+}

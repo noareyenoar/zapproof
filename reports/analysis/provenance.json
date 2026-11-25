@@ -1,0 +1,12 @@
+{
+  "generated": "2026-11-25T10:34:37+00:00",
+  "commit": "bd4b7f89776f11a395eeca56707394151e33858f",
+  "db_sha256": "025b8a39bb8e102981392f80037554ae91df58b74595a0afd488675cbc751a5e",
+  "report": "reports/phase_B_public_analysis.md",
+  "charts": [
+    "reports/analysis/rule_prevalence.svg",
+    "reports/analysis/seller_evidence_distribution.svg",
+    "reports/analysis/payments_per_day.svg"
+  ],
+  "methodology_version": "v1"
+}

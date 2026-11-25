@@ -1,0 +1,37 @@
+#!/bin/sh
+# Pre-commit secret scan — prompt Section 6, task 0.2.
+#
+# Blocks a commit when a secret is staged. Uses gitleaks when it can be found;
+# otherwise falls back to scripts/staged_leak_check.sh, which is a documented grep
+# scan (prompt Section 6 task 0.2 explicitly permits that fallback).
+#
+# Enable once per clone:
+#     git config core.hooksPath .githooks
+
+GITLEAKS="$(command -v gitleaks 2>/dev/null || true)"
+
+# winget updates the user PATH in the registry, but a shell started before the
+# install keeps the stale environment. Look in its package directory as well so
+# the hook behaves the same in old and new shells.
+if [ -z "$GITLEAKS" ] && [ -n "$LOCALAPPDATA" ]; then
+    for candidate in "$LOCALAPPDATA"/Microsoft/WinGet/Packages/Gitleaks.Gitleaks_*/gitleaks.exe; do
+        if [ -x "$candidate" ]; then
+            GITLEAKS="$candidate"
+            break
+        fi
+    done
+fi
+
+if [ -n "$GITLEAKS" ]; then
+    "$GITLEAKS" git --staged --redact --no-banner
+    status=$?
+    if [ "$status" -ne 0 ]; then
+        echo ""
+        echo "pre-commit: gitleaks found a potential secret in the staged changes."
+        echo "Remove it, or if it is a false positive add it to .gitleaksignore with a reason."
+    fi
+    exit "$status"
+fi
+
+echo "pre-commit: gitleaks not found — falling back to the documented grep scan"
+exec sh "$(git rev-parse --show-toplevel)/scripts/staged_leak_check.sh"

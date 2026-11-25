@@ -1,0 +1,71 @@
+{
+  "generated": "2026-11-25T10:34:32+00:00",
+  "commit": "bd4b7f89776f11a395eeca56707394151e33858f",
+  "db_sha256": "025b8a39bb8e102981392f80037554ae91df58b74595a0afd488675cbc751a5e",
+  "transport": "uvicorn on 127.0.0.1, httpx client",
+  "cases": {
+    "valid_binding_accepted": true,
+    "replay_rejected": true,
+    "caller_constructed_challenge_rejected": true,
+    "wrong_domain_rejected": true,
+    "one_key_rejected": true,
+    "unsigned_revocation_rejected": true,
+    "rotation_accepted": true,
+    "signed_revocation_accepted": true,
+    "lifecycle_recorded": true,
+    "expired_rejected": true
+  },
+  "details": {
+    "valid_binding_accepted": {
+      "layer": "http",
+      "status": 201
+    },
+    "replay_rejected": {
+      "layer": "http",
+      "status": 400,
+      "error": "challenge_already_used"
+    },
+    "caller_constructed_challenge_rejected": {
+      "layer": "http",
+      "status": 400,
+      "error": "challenge_not_issued"
+    },
+    "wrong_domain_rejected": {
+      "layer": "http",
+      "status": 400,
+      "error": "evm_signature_does_not_match_address"
+    },
+    "one_key_rejected": {
+      "layer": "http",
+      "status": 422,
+      "note": "empty Nostr signature is refused before any state is touched"
+    },
+    "unsigned_revocation_rejected": {
+      "layer": "http",
+      "status": 400,
+      "error": "evm_signature_malformed"
+    },
+    "rotation_accepted": {
+      "layer": "http",
+      "status": 200
+    },
+    "signed_revocation_accepted": {
+      "layer": "http",
+      "status": 200,
+      "revoked_by": "nostr"
+    },
+    "lifecycle_recorded": {
+      "layer": "http",
+      "events": [
+        "created",
+        "rotated",
+        "revoked"
+      ]
+    },
+    "expired_rejected": {
+      "layer": "service (injected clock)",
+      "error": "challenge_expired"
+    }
+  },
+  "all_passed": true
+}

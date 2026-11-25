@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "zapproof": {
+      "type": "streamable-http",
+      "url": "https://zapproof-hc75zyauja-uc.a.run.app/mcp"
+    }
+  }
+}

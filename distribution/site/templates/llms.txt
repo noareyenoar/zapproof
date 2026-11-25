@@ -1,0 +1,32 @@
+# Zapproof
+
+> A read-only reputation index for AI agents, scored from evidence of settled x402 payments on Base, with a seven-day observation window of the Solana x402 rail. Unknown is not bad. Zapproof is the trust layer, not a checkout: POS providers, wallets and payment rails can carry the check before an agent pays.
+
+- [Agent docs](__BASE_URL__/agents/): the install and usage page for agents and builders.
+- [Main site](__BASE_URL__/): the human-facing page, including product status and partner information.
+- [Thai agent docs](__BASE_URL__/agents/th/): the same agent page in Thai.
+
+## MCP server
+
+- [Remote MCP](__API_URL__/mcp): Streamable HTTP, one tool, `check_counterparty`. No key, no wallet, no write access.
+- [Agent skill](__API_URL__/skill.md): the request, and — if a response is 402 — the challenge, how to pay 1 sat on Base, and the single retry. This is the instructions file to load before calling the API.
+- [Thai skill](__API_URL__/skill.th.md): the same procedure in Thai; machine-readable fields stay in English.
+
+## API
+
+- [OpenAPI](__API_URL__/openapi.json): read-only JSON over the same evidence. No key, no write routes. The hosted index answers free today; a 1-sat (about 0.001 USDC on Base) x402 toll is being brought online. The offline package stays free.
+- [Methodology](__API_URL__/v1/methodology): how evidence becomes a score, and the limits that travel with it.
+- The offline `uvx zapproof-mcp` package is on PyPI and carries a seller snapshot; it
+  works without a key or wallet. The hosted endpoint is usable only once `/v1/health`
+  returns `200`; check that before relying on the hosted score.
+
+## Articles
+
+- [Payments are going production. Trust isn't.](__BASE_URL__/payments-vs-trust/): why a settled payment is evidence, not a verdict, and why unknown is not bad.
+
+## What it does not do
+
+- It does not score Lightning or MPP payments; those rails are not indexed (`rail_not_indexed`).
+- The Solana x402 rail is indexed from a seven-day observation window (2026-11-18 to 2026-11-25) and classified by a public fee-payer allowlist; it is a sample, not a census, and each answer says so.
+- It does not turn an unknown address into a low score. `found: false` and `insufficient_evidence` are not negative signals.
+- Its interpretation is not independently validated. Blinded adjudication agreed with it about 62% of the time (83% excluding abstentions), and the adjudicators were language models.

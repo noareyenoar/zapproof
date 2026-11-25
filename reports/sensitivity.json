@@ -1,0 +1,249 @@
+{
+  "generated": "2026-11-16T11:28:19+00:00",
+  "commit": "355350a35ddee7dd8766eb437433a8356c3657fa",
+  "db_sha256": "7fc754a8c778259695ea412611335d46491885cd4c821485f5ad9f578f49ed17",
+  "flag_cutoff": 0.5,
+  "perturbation_pct": 25,
+  "scored_only": true,
+  "baseline_from": "stored_classifications",
+  "override_seller_count": 0,
+  "baseline_share": 0.005902,
+  "seller_count": 19397,
+  "scored_seller_count": 1433,
+  "settlement_count": 2389053,
+  "perturbations": {
+    "global_down_25": {
+      "factor": 0.75,
+      "share": 0.000491,
+      "shift_pp": -0.5411
+    },
+    "global_up_25": {
+      "factor": 1.25,
+      "share": 0.005156,
+      "shift_pp": -0.0746
+    },
+    "min_settlements_down_25": {
+      "value": 15,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "min_settlements_up_25": {
+      "value": 25,
+      "share": 0.005883,
+      "shift_pp": -0.0018
+    },
+    "thin_payer_max_payers_down_25": {
+      "value": 2,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "thin_payer_max_payers_up_25": {
+      "value": 4,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "thin_payer_min_settlements_down_25": {
+      "value": 15,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "thin_payer_min_settlements_up_25": {
+      "value": 25,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "repeat_buyer_rate_down_25": {
+      "value": 0.6,
+      "share": 0.006524,
+      "shift_pp": 0.0623
+    },
+    "repeat_buyer_rate_up_25": {
+      "value": 1.0,
+      "share": 0.005374,
+      "shift_pp": -0.0527
+    },
+    "repeat_buyer_min_payers_down_25": {
+      "value": 2,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "repeat_buyer_min_payers_up_25": {
+      "value": 4,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "repeat_buyer_max_payers_down_25": {
+      "value": 8,
+      "share": 0.005509,
+      "shift_pp": -0.0393
+    },
+    "repeat_buyer_max_payers_up_25": {
+      "value": 12,
+      "share": 0.006026,
+      "shift_pp": 0.0124
+    },
+    "fixed_amount_entropy_down_25": {
+      "value": 0.1125,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "fixed_amount_entropy_up_25": {
+      "value": 0.1875,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "burstiness_down_25": {
+      "value": 0.525,
+      "share": 0.006049,
+      "shift_pp": 0.0147
+    },
+    "burstiness_up_25": {
+      "value": 0.875,
+      "share": 0.005453,
+      "shift_pp": -0.0448
+    },
+    "peak_hour_share_down_25": {
+      "value": 0.375,
+      "share": 0.006187,
+      "shift_pp": 0.0285
+    },
+    "peak_hour_share_up_25": {
+      "value": 0.625,
+      "share": 0.005593,
+      "shift_pp": -0.0308
+    },
+    "min_observation_hours_down_25": {
+      "value": 18.0,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "min_observation_hours_up_25": {
+      "value": 30.0,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "min_payer_diversity_for_fixed_price_down_25": {
+      "value": 0.375,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "min_payer_diversity_for_fixed_price_up_25": {
+      "value": 0.625,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "relayer_concentration_down_25": {
+      "value": 0.675,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "relayer_concentration_up_25": {
+      "value": 1.125,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "reciprocity_rate_down_25": {
+      "value": 0.0375,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "reciprocity_rate_up_25": {
+      "value": 0.0625,
+      "share": 0.0058,
+      "shift_pp": -0.0102
+    },
+    "reciprocity_min_payers_down_25": {
+      "value": 2,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "reciprocity_min_payers_up_25": {
+      "value": 4,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "weight_self_loop_down_25": {
+      "value": 0.3375,
+      "share": 0.005557,
+      "shift_pp": -0.0345
+    },
+    "weight_self_loop_up_25": {
+      "value": 0.5625,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "weight_thin_payer_base_down_25": {
+      "value": 0.225,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "weight_thin_payer_base_up_25": {
+      "value": 0.375,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "weight_repeat_buyer_dominant_down_25": {
+      "value": 0.15,
+      "share": 0.005726,
+      "shift_pp": -0.0176
+    },
+    "weight_repeat_buyer_dominant_up_25": {
+      "value": 0.25,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "weight_fixed_amount_down_25": {
+      "value": 0.15,
+      "share": 0.005781,
+      "shift_pp": -0.012
+    },
+    "weight_fixed_amount_up_25": {
+      "value": 0.25,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "weight_bursty_down_25": {
+      "value": 0.1125,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "weight_bursty_up_25": {
+      "value": 0.1875,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "weight_concentrated_in_time_down_25": {
+      "value": 0.225,
+      "share": 0.005606,
+      "shift_pp": -0.0296
+    },
+    "weight_concentrated_in_time_up_25": {
+      "value": 0.375,
+      "share": 0.006418,
+      "shift_pp": 0.0517
+    },
+    "weight_single_relayer_down_25": {
+      "value": 0.075,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "weight_single_relayer_up_25": {
+      "value": 0.125,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "weight_reciprocity_down_25": {
+      "value": 0.1125,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    },
+    "weight_reciprocity_up_25": {
+      "value": 0.1875,
+      "share": 0.005902,
+      "shift_pp": 0.0
+    }
+  },
+  "max_share_shift_pp": 0.5411,
+  "baseline_share_pct": 0.5902,
+  "note": "The baseline is the share of settlements from scored sellers at or above the flag cutoff in the stored classifications \u2014 the number the report publishes. Each perturbation changes one threshold or weight, or all at once, by 25% in each direction and recomputes the rules, except for sellers held by a recorded dispute_override, whose stored likelihood is held fixed. Sellers below the evidence minimum are excluded because no likelihood is published for them. The weights are judgement, not measurement, so this table is the honest bound on how much the headline depends on them."
+}

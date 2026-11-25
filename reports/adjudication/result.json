@@ -1,0 +1,73 @@
+{
+  "sample_size": 65,
+  "flagged_sellers": 28,
+  "agreement": {
+    "adjudicator_1": {
+      "rate": 0.6154,
+      "agreed": 40,
+      "considered": 65
+    },
+    "adjudicator_2": {
+      "rate": 0.6154,
+      "agreed": 40,
+      "considered": 65
+    },
+    "inter_rater": 0.0,
+    "inter_rater_raw": 1.0
+  },
+  "verdict_files_identical": true,
+  "verdict_file_sha256": {
+    "verdicts_1.json": "6af6a880f0e253cfe73dd26ae2225f6dad8c3fa445233665703cceaad2417e58",
+    "verdicts_2.json": "6af6a880f0e253cfe73dd26ae2225f6dad8c3fa445233665703cceaad2417e58"
+  },
+  "negative_control": {
+    "adjudicator_1_vs_broken": 0.0462,
+    "adjudicator_2_vs_broken": 0.0462
+  },
+  "advertised_addresses_checked": 46,
+  "false_positives_against_catalogue": [],
+  "abstention_rate": 0.2615,
+  "checks": {
+    "discriminative": {
+      "value": 28,
+      "threshold": 10,
+      "pass": true
+    },
+    "agreement_adjudicator_1": {
+      "value": 0.6154,
+      "threshold": 0.7,
+      "pass": false
+    },
+    "agreement_adjudicator_2": {
+      "value": 0.6154,
+      "threshold": 0.7,
+      "pass": false
+    },
+    "inter_rater": {
+      "value": 0.0,
+      "threshold": 0.7,
+      "pass": false,
+      "verdict_files_identical": true,
+      "note": "the two verdict files are byte-identical; identical output cannot serve as two independent raters (one run copied twice, or two deterministic runs with no measurable disagreement)"
+    },
+    "negative_control": {
+      "value": 0.0462,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "external_anchor": {
+      "value": 0,
+      "threshold": 0,
+      "pass": true,
+      "verified": true
+    },
+    "abstention": {
+      "value": 0.2615,
+      "threshold": 0.3,
+      "pass": true
+    }
+  },
+  "all_pass": false,
+  "best_agreement": 0.6154,
+  "note": "The adjudicators are language models, not humans (owner decision, 2026-10-28). They share training data and priors with the author of the classifier, so their independence is weaker than a human's. Blinding, the prior-committed rubric, the inter-rater check and the negative control are what stand in for human scrutiny. WARNING: verdicts_1.json and verdicts_2.json are byte-identical (sha256 6af6a880f0e253cfe73dd26ae2225f6dad8c3fa445233665703cceaad2417e58). Identical files cannot serve as two independent raters \u2014 one run copied twice, or two deterministic runs with no measurable disagreement. The inter-rater check is forced to fail."
+}

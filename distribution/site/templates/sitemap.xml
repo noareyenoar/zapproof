@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>__BASE_URL__/</loc>
+    <lastmod>__LASTMOD__</lastmod>
+  </url>
+  <url>
+    <loc>__BASE_URL__/th/</loc>
+    <lastmod>__LASTMOD__</lastmod>
+  </url>
+  <url>
+    <loc>__BASE_URL__/agents/</loc>
+    <lastmod>__LASTMOD__</lastmod>
+  </url>
+  <url>
+    <loc>__BASE_URL__/agents/th/</loc>
+    <lastmod>__LASTMOD__</lastmod>
+  </url>
+  <url>
+    <loc>__BASE_URL__/payments-vs-trust/</loc>
+    <lastmod>__LASTMOD__</lastmod>
+  </url>
+</urlset>

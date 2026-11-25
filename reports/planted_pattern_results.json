@@ -1,0 +1,86 @@
+{
+  "cutoff": 0.5,
+  "patterns": [
+    "self_loop",
+    "ping_pong",
+    "fan_in_fresh",
+    "fixed_amount_burst",
+    "genuine_varied",
+    "genuine_repeat_customers"
+  ],
+  "settlements_per_pattern": {
+    "self_loop": 40,
+    "ping_pong": 80,
+    "fan_in_fresh": 30,
+    "fixed_amount_burst": 60,
+    "genuine_varied": 80,
+    "genuine_repeat_customers": 80
+  },
+  "per_seller": {
+    "0xgenuine_repeat": {
+      "likelihood": 0.0,
+      "flagged": false,
+      "rules_fired": []
+    },
+    "0xgenuine_varied": {
+      "likelihood": 0.0,
+      "flagged": false,
+      "rules_fired": []
+    },
+    "0xping_a": {
+      "likelihood": 0.5,
+      "flagged": true,
+      "rules_fired": [
+        "fixed_amount",
+        "thin_payer_base"
+      ]
+    },
+    "0xping_b": {
+      "likelihood": 0.5,
+      "flagged": true,
+      "rules_fired": [
+        "fixed_amount",
+        "thin_payer_base"
+      ]
+    },
+    "0xplanted_burst": {
+      "likelihood": 0.7,
+      "flagged": true,
+      "rules_fired": [
+        "concentrated_in_time",
+        "fixed_amount",
+        "repeat_buyer_dominant"
+      ]
+    },
+    "0xplanted_fanin": {
+      "likelihood": 0.0,
+      "flagged": false,
+      "rules_fired": []
+    },
+    "0xplanted_ping": {
+      "likelihood": 0.5,
+      "flagged": true,
+      "rules_fired": [
+        "fixed_amount",
+        "thin_payer_base"
+      ]
+    },
+    "0xplanted_self": {
+      "likelihood": 0.95,
+      "flagged": true,
+      "rules_fired": [
+        "fixed_amount",
+        "self_loop",
+        "thin_payer_base"
+      ]
+    }
+  },
+  "planted_count": 4,
+  "planted_flagged": 3,
+  "genuine_count": 2,
+  "genuine_flagged": 0,
+  "recall": 0.75,
+  "synthetic_genuine_fpr": 0.0,
+  "circularity_disclosed": true,
+  "circularity_note": "This test is partly circular. The planted patterns were written by the same author as the rules, so a high recall shows the rules find patterns someone planted, not that they find real signaling. It tests mechanics, not real-world truth."
+}

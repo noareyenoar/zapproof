@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 390" width="760" height="390" role="img" aria-labelledby="t d" font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+<title id="t">Share of sellers where each classifier rule fired</title>
+<desc>Horizontal bars over 19,397 classified sellers. Values are percentages and are printed beside each bar.</desc>
+
+<style>
+.surface{fill:#fcfcfb}
+.ink{fill:#0b0b0b}
+.secondary{fill:#52514e}
+.muted{fill:#898781}
+.grid{stroke:#e1e0d9;stroke-width:1}
+.axis{stroke:#c3c2b7;stroke-width:1}
+.series{fill:#2a78d6;stroke:#2a78d6}
+.series-fill{fill:#2a78d6;fill-opacity:.10;stroke:none}
+.line{fill:none;stroke:#2a78d6;stroke-width:2}
+.ring{stroke:#fcfcfb;stroke-width:2}
+@media (prefers-color-scheme: dark){
+.surface{fill:#1a1a19}
+.ink{fill:#f0efec}
+.secondary{fill:#c3c2b7}
+.muted{fill:#898781}
+.grid{stroke:#2c2c2a}
+.axis{stroke:#383835}
+.series{fill:#3987e5;stroke:#3987e5}
+.series-fill{fill:#3987e5}
+.line{stroke:#3987e5}
+.ring{stroke:#1a1a19}
+}
+</style>
+
+<rect class="surface" width="760" height="390" rx="8"/>
+<text class="ink" x="28" y="34" font-size="17" font-weight="600">Which signals the classifier finds</text>
+<text class="secondary" x="28" y="56" font-size="12">Share of 19,397 classified sellers where each rule fired. A seller can trigger more than one.</text>
+<line class="grid" x1="214" y1="78" x2="214" y2="360"/>
+<text class="muted" x="214" y="378" font-size="11" text-anchor="middle" style="font-variant-numeric:tabular-nums">0%</text>
+<line class="grid" x1="371" y1="78" x2="371" y2="360"/>
+<text class="muted" x="371" y="378" font-size="11" text-anchor="middle" style="font-variant-numeric:tabular-nums">0.5%</text>
+<line class="grid" x1="529" y1="78" x2="529" y2="360"/>
+<text class="muted" x="529" y="378" font-size="11" text-anchor="middle" style="font-variant-numeric:tabular-nums">1%</text>
+<line class="grid" x1="686" y1="78" x2="686" y2="360"/>
+<text class="muted" x="686" y="378" font-size="11" text-anchor="middle" style="font-variant-numeric:tabular-nums">1.5%</text>
+<text class="ink" x="200" y="97.0" font-size="13" text-anchor="end" dominant-baseline="middle">Fixed amount</text>
+<path class="series" d="M 214.00 88.00 H 592.85 Q 596.85 88.00 596.85 92.00 V 102.00 Q 596.85 106.00 592.85 106.00 H 214.00 Z"/>
+<text class="secondary" x="604.8" y="97.0" font-size="12" dominant-baseline="middle" style="font-variant-numeric:tabular-nums">1.22%</text>
+<text class="ink" x="200" y="131.0" font-size="13" text-anchor="end" dominant-baseline="middle">Bursty activity</text>
+<path class="series" d="M 214.00 122.00 H 560.40 Q 564.40 122.00 564.40 126.00 V 136.00 Q 564.40 140.00 560.40 140.00 H 214.00 Z"/>
+<text class="secondary" x="572.4" y="131.0" font-size="12" dominant-baseline="middle" style="font-variant-numeric:tabular-nums">1.11%</text>
+<text class="ink" x="200" y="165.0" font-size="13" text-anchor="end" dominant-baseline="middle">Thin payer base</text>
+<path class="series" d="M 214.00 156.00 H 429.00 Q 433.00 156.00 433.00 160.00 V 170.00 Q 433.00 174.00 429.00 174.00 H 214.00 Z"/>
+<text class="secondary" x="441.0" y="165.0" font-size="12" dominant-baseline="middle" style="font-variant-numeric:tabular-nums">0.70%</text>
+<text class="ink" x="200" y="199.0" font-size="13" text-anchor="end" dominant-baseline="middle">Concentrated in time</text>
+<path class="series" d="M 214.00 190.00 H 404.67 Q 408.67 190.00 408.67 194.00 V 204.00 Q 408.67 208.00 404.67 208.00 H 214.00 Z"/>
+<text class="secondary" x="416.7" y="199.0" font-size="12" dominant-baseline="middle" style="font-variant-numeric:tabular-nums">0.62%</text>
+<text class="ink" x="200" y="233.0" font-size="13" text-anchor="end" dominant-baseline="middle">Repeat-buyer dominant</text>
+<path class="series" d="M 214.00 224.00 H 315.45 Q 319.45 224.00 319.45 228.00 V 238.00 Q 319.45 242.00 315.45 242.00 H 214.00 Z"/>
+<text class="secondary" x="327.4" y="233.0" font-size="12" dominant-baseline="middle" style="font-variant-numeric:tabular-nums">0.34%</text>
+<text class="ink" x="200" y="267.0" font-size="13" text-anchor="end" dominant-baseline="middle">Self-payment</text>
+<path class="series" d="M 214.00 258.00 H 313.82 Q 317.82 258.00 317.82 262.00 V 272.00 Q 317.82 276.00 313.82 276.00 H 214.00 Z"/>
+<text class="secondary" x="325.8" y="267.0" font-size="12" dominant-baseline="middle" style="font-variant-numeric:tabular-nums">0.33%</text>
+<text class="ink" x="200" y="301.0" font-size="13" text-anchor="end" dominant-baseline="middle">Round trip</text>
+<path class="series" d="M 214.00 292.00 H 265.16 Q 269.16 292.00 269.16 296.00 V 306.00 Q 269.16 310.00 265.16 310.00 H 214.00 Z"/>
+<text class="secondary" x="277.2" y="301.0" font-size="12" dominant-baseline="middle" style="font-variant-numeric:tabular-nums">0.18%</text>
+<text class="ink" x="200" y="335.0" font-size="13" text-anchor="end" dominant-baseline="middle">Single relayer</text>
+<text class="secondary" x="222.0" y="335.0" font-size="12" dominant-baseline="middle" style="font-variant-numeric:tabular-nums">0.00%</text>
+</svg>

@@ -1,0 +1,24 @@
+{
+  "supported": [
+    {
+      "contract": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+      "settlements": 2389053,
+      "decimals": 6
+    }
+  ],
+  "unsupported": [
+    {
+      "contract": "0x671be08d6d3c826c2f6d76915f1b54af484d4077",
+      "settlements": 1460
+    }
+  ],
+  "mechanisms": [
+    {
+      "mechanism": "eip3009_authorization_used",
+      "settlements": 2389053
+    }
+  ],
+  "unsupported_share": 0.001015,
+  "unsupported_source": "reports/token_census.json (Phase 0, seven-day unfiltered scan)",
+  "note": "The supported list comes from the settlements table and can only contain tokens the decoder already decoded. The unresolved share therefore comes from the Phase 0 census, which scanned without an address filter and recorded what could not be resolved. Measuring it from the settlements table would make it zero by construction, which is what an earlier version did."
+}
